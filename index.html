@@ -215,248 +215,248 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 <body>
 
 <div id="auth-screen">
-  <div class="auth-box">
-    <div class="auth-logo"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18V17l7 4 7-4v-5.82L23 9zm0 2.09L19.07 9 12 12.91 4.93 9zm6 9.29l-6 3.43-6-3.43v-3.56L12 15l6-3.18z"/></svg></div>
-    <div class="auth-title">EnglishUp</div>
-    <div class="auth-sub">Nauka angielskiego dopasowana do Twojego dnia</div>
-    <div class="auth-tabs">
-      <button class="auth-tab active" onclick="switchTab('login')">Logowanie</button>
-      <button class="auth-tab" onclick="switchTab('register')">Rejestracja</button>
-    </div>
-    <input class="auth-input" id="auth-email" type="email" placeholder="Adres Gmail">
-    <input class="auth-input" id="auth-pass" type="password" placeholder="Haslo" onkeydown="if(event.key==='Enter')authAction()">
-    <button class="auth-btn" id="auth-btn" onclick="authAction()">Zaloguj sie</button>
-    <div class="auth-msg" id="auth-msg"></div>
-  </div>
+ <div class="auth-box">
+ <div class="auth-logo"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18V17l7 4 7-4v-5.82L23 9zm0 2.09L19.07 9 12 12.91 4.93 9zm6 9.29l-6 3.43-6-3.43v-3.56L12 15l6-3.18z"/></svg></div>
+ <div class="auth-title">EnglishUp</div>
+ <div class="auth-sub">Nauka angielskiego dopasowana do Twojego dnia</div>
+ <div class="auth-tabs">
+ <button class="auth-tab active" onclick="switchTab('login')">Logowanie</button>
+ <button class="auth-tab" onclick="switchTab('register')">Rejestracja</button>
+ </div>
+ <input class="auth-input" id="auth-email" type="email" placeholder="Adres Gmail">
+ <input class="auth-input" id="auth-pass" type="password" placeholder="Haslo" onkeydown="if(event.key==='Enter')authAction()">
+ <button class="auth-btn" id="auth-btn" onclick="authAction()">Zaloguj siÄ™</button>
+ <div class="auth-msg" id="auth-msg"></div>
+ </div>
 </div>
 
 <div id="app-screen">
-  <div class="topbar">
-    <div class="topbar-left">
-      <div class="t-logo"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18V17l7 4 7-4v-5.82L23 9zm0 2.09L19.07 9 12 12.91 4.93 9zm6 9.29l-6 3.43-6-3.43v-3.56L12 15l6-3.18z"/></svg></div>
-      <div class="t-name">EnglishUp</div>
-      <div class="t-level">A2</div>
-    </div>
-    <div class="topbar-right">
-      <div class="streak-chip">đź”Ą <span id="streak-disp">0</span></div>
-      <div class="xp-chip"><span class="xp-num" id="xp-disp">0</span> XP</div>
-      <span class="user-email" id="user-email"></span>
-      <button class="logout-btn" onclick="logout()">Wyloguj</button>
-    </div>
-  </div>
-  <div class="xp-bar-wrap">
-    <div class="xp-bar"><div class="xp-bar-fill" id="xp-bar-fill" style="width:0%"></div></div>
-    <div class="xp-bar-lbl" id="xp-bar-lbl">0 / 100 XP</div>
-  </div>
-  
-  <nav class="bot-nav">
-    <button class="bn-item act" id="bn-morning" onclick="goNav('morning')">
-      <svg viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79zm10.45-1.79l-1.8 1.79 1.41 1.41 1.8-1.79zM13 1h-2v3h2zM4 11H1v2h3zm16 0v2h3v-2zm-8 1c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95V22h2v-3.05c2.5-.5 4.5-2.5 4.5-5.95h-2c0 2.21-1.79 4-4 4s-4-1.79-4-4H5c0 3.45 2 5.45 4.5 5.95z"/></svg>
-      <span class="bn-label">Rano</span>
-    </button>
-    <button class="bn-item" id="bn-drive" onclick="goNav('drive')">
-      <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
-      <span class="bn-label">Jazda</span>
-    </button>
-    <button class="bn-item" id="bn-evening" onclick="goNav('evening')">
-      <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
-      <span class="bn-label">Wieczor</span>
-    </button>
-    <button class="bn-item" id="bn-friday" onclick="goNav('friday')">
-      <svg viewBox="0 0 24 24"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
-      <span class="bn-label">Piatek</span>
-    </button>
-    <button class="bn-item" id="bn-weekend" onclick="goNav('weekend')">
-      <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
-      <span class="bn-label">Weekend</span>
-    </button>
-    <button class="bn-item" id="bn-bonus" onclick="goNav('bonus')">
-      <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-      <span class="bn-label">Bonus</span>
-    </button>
-  </nav>
+ <div class="topbar">
+ <div class="topbar-left">
+ <div class="t-logo"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18V17l7 4 7-4v-5.82L23 9zm0 2.09L19.07 9 12 12.91 4.93 9zm6 9.29l-6 3.43-6-3.43v-3.56L12 15l6-3.18z"/></svg></div>
+ <div class="t-name">EnglishUp</div>
+ <div class="t-level">A2</div>
+ </div>
+ <div class="topbar-right">
+ <div class="streak-chip">đź”Ą <span id="streak-disp">0</span></div>
+ <div class="xp-chip"><span class="xp-num" id="xp-disp">0</span> XP</div>
+ <span class="user-email" id="user-email"></span>
+ <button class="logout-btn" onclick="logout()">Wyloguj</button>
+ </div>
+ </div>
+ <div class="xp-bar-wrap">
+ <div class="xp-bar"><div class="xp-bar-fill" id="xp-bar-fill" style="width:0%"></div></div>
+ <div class="xp-bar-lbl" id="xp-bar-lbl">0 / 100 XP</div>
+ </div>
+ 
+ <nav class="bot-nav">
+ <button class="bn-item act" id="bn-morning" onclick="goNav('morning')">
+ <svg viewBox="0 0 24 24"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79zm10.45-1.79l-1.8 1.79 1.41 1.41 1.8-1.79zM13 1h-2v3h2zM4 11H1v2h3zm16 0v2h3v-2zm-8 1c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95V22h2v-3.05c2.5-.5 4.5-2.5 4.5-5.95h-2c0 2.21-1.79 4-4 4s-4-1.79-4-4H5c0 3.45 2 5.45 4.5 5.95z"/></svg>
+ <span class="bn-label">Rano</span>
+ </button>
+ <button class="bn-item" id="bn-drive" onclick="goNav('drive')">
+ <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+ <span class="bn-label">Jazda</span>
+ </button>
+ <button class="bn-item" id="bn-evening" onclick="goNav('evening')">
+ <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+ <span class="bn-label">Wieczor</span>
+ </button>
+ <button class="bn-item" id="bn-friday" onclick="goNav('friday')">
+ <svg viewBox="0 0 24 24"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+ <span class="bn-label">Piatek</span>
+ </button>
+ <button class="bn-item" id="bn-weekend" onclick="goNav('weekend')">
+ <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+ <span class="bn-label">Weekend</span>
+ </button>
+ <button class="bn-item" id="bn-bonus" onclick="goNav('bonus')">
+ <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+ <span class="bn-label">Bonus</span>
+ </button>
+ </nav>
 
 
-  <div class="pane active" id="pane-morning">
-    <div class="notice n-silent"><svg viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0014 7.97V9.7l2.45 2.45c.03-.2.05-.41.05-.65zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>Tryb cichy Â· 15 min Â· bez dzwieku</div>
-    <div class="pb-row"><div class="pb"><div class="pb-fill" id="m-fill" style="width:20%;background:var(--accent)"></div></div><div class="pb-lbl" id="m-lbl">1/5</div></div>
-    <div class="card" id="m-card">
-      <div class="lc-meta"><span class="tag ta2" id="m-tag">A2</span><span class="lc-num" id="m-num">slĂłwko 1 z 5</span></div>
-      <div class="w-big" id="m-word">busy</div><div class="w-ph" id="m-ph">/bizi/</div>
-      <button class="speak-btn" id="m-speak" onclick="speakWord('m-word')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg>PosĹ‚uchaj</button>
-      <span class="w-pos" id="m-pos">przymiotnik</span>
-      <div class="w-def" id="m-def">zajety â€” nie masz czasu</div>
-      <div class="w-ex" id="m-ex">I am very <b>busy</b> at work.</div>
-      <div class="tip"><div class="tip-lbl">WskazĂłwka</div><span id="m-tip">Nie myl z "dizzy"!</span></div>
-      <div class="rrow">
-        <div class="rbt r0" onclick="rate('m',0)">Nie znam<span>za 5 min</span></div>
-        <div class="rbt" onclick="rate('m',1)">Prawie<span>jutro</span></div>
-        <div class="rbt r2" onclick="rate('m',2)">Znam<span>za 3 dni</span></div>
-        <div class="rbt r3" onclick="rate('m',3)">Latwe!<span>za 7 dni</span></div>
-      </div>
-    </div>
-    <div class="ai-box">
-      <div class="ai-lbl">Zapytaj AI o slĂłwko</div>
-      <div class="ai-row"><textarea class="ai-inp" id="m-inp" rows="1" placeholder='np. "UlĂłz zdanie z busy w pracy"'></textarea><button class="ai-btn" id="m-btn" onclick="ask('m')">Zapytaj</button></div>
-      <div class="dots" id="m-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-      <div class="ai-out" id="m-out"></div>
-    </div>
-  </div>
+ <div class="pane active" id="pane-morning">
+ <div class="notice n-silent"><svg viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0014 7.97V9.7l2.45 2.45c.03-.2.05-.41.05-.65zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>Tryb cichy Â· 15 min Â· bez dĹşwiÄ™ku</div>
+ <div class="pb-row"><div class="pb"><div class="pb-fill" id="m-fill" style="width:20%;background:var(--accent)"></div></div><div class="pb-lbl" id="m-lbl">1/5</div></div>
+ <div class="card" id="m-card">
+ <div class="lc-meta"><span class="tag ta2" id="m-tag">A2</span><span class="lc-num" id="m-num">slowko 1 z 5</span></div>
+ <div class="w-big" id="m-word">busy</div><div class="w-ph" id="m-ph">/bizi/</div>
+ <button class="speak-btn" id="m-speak" onclick="speakWord('m-word')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg>Posluchaj</button>
+ <span class="w-pos" id="m-pos">przymiotnik</span>
+ <div class="w-def" id="m-def">zajety - nie masz czasu</div>
+ <div class="w-ex" id="m-ex">I am very <b>busy</b> at work.</div>
+ <div class="tip"><div class="tip-lbl">Wskazowka</div><span id="m-tip">Nie myl z "dizzy"!</span></div>
+ <div class="rrow">
+ <div class="rbt r0" onclick="rate('m',0)">Nie znam<span>za 5 min</span></div>
+ <div class="rbt" onclick="rate('m',1)">Prawie<span>jutro</span></div>
+ <div class="rbt r2" onclick="rate('m',2)">Znam<span>za 3 dni</span></div>
+ <div class="rbt r3" onclick="rate('m',3)">Ĺatwe!<span>za 7 dni</span></div>
+ </div>
+ </div>
+ <div class="ai-box">
+ <div class="ai-lbl">Zapytaj AI o slowko</div>
+ <div class="ai-row"><textarea class="ai-inp" id="m-inp" rows="1" placeholder='np. "Uloz zdanie z busy w pracy"'></textarea><button class="ai-btn" id="m-btn" onclick="ask('m')">Zapytaj</button></div>
+ <div class="dots" id="m-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+ <div class="ai-out" id="m-out"></div>
+ </div>
+ </div>
 
-  <div class="pane" id="pane-drive">
-    <div class="drive-wrap">
-      <div class="drive-head"><span class="d-badge" id="d-badge">BLOK 1 Â· PYT 1</span><span class="d-score" id="d-score">0/0</span></div>
-      <div class="d-q" id="d-q">Co znaczy "tired"?</div>
-      <div class="d-opts" id="d-opts">
-        <div class="dopt">A. zmeczony</div><div class="dopt">B. glodny</div>
-        <div class="dopt">C. szczesliwy</div><div class="dopt">D. zajety</div>
-      </div>
-      <div class="timer-row">
-        <div class="t-val" id="t-val">Gotowy</div>
-        <div class="t-bar-wrap"><div class="t-bar-fill" id="t-fill" style="width:100%"></div></div>
-        <button class="start-btn" id="start-btn" onclick="toggleTimer()">Start jazdy</button>
-      </div>
-      <button class="d-next" id="d-next" onclick="dNext()">Nastepne pytanie â†’</button>
-    </div>
-    <div class="ai-box">
-      <div class="ai-lbl">AI generuje pytania dopasowane do Twoich bledĂłw</div>
-      <div class="ai-row"><textarea class="ai-inp" id="d-inp" rows="1" placeholder="np. Pytania o zawody..."></textarea><button class="ai-btn" id="d-btn" onclick="ask('d')">Generuj</button></div>
-      <div class="dots" id="d-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-      <div class="ai-out" id="d-out"></div>
-    </div>
-  </div>
+ <div class="pane" id="pane-drive">
+ <div class="drive-wrap">
+ <div class="drive-head"><span class="d-badge" id="d-badge">BLOK 1 Â· PYT 1</span><span class="d-score" id="d-score">0/0</span></div>
+ <div class="d-q" id="d-q">Co znaczy "tired"?</div>
+ <div class="d-opts" id="d-opts">
+ <div class="dopt">A. zmeczony</div><div class="dopt">B. glodny</div>
+ <div class="dopt">C. szczesliwy</div><div class="dopt">D. zajety</div>
+ </div>
+ <div class="timer-row">
+ <div class="t-val" id="t-val">Gotowy</div>
+ <div class="t-bar-wrap"><div class="t-bar-fill" id="t-fill" style="width:100%"></div></div>
+ <button class="start-btn" id="start-btn" onclick="toggleTimer()">Start jazdy</button>
+ </div>
+ <button class="d-next" id="d-next" onclick="dNext()">NastÄ™pne pytanie â†’</button>
+ </div>
+ <div class="ai-box">
+ <div class="ai-lbl">AI generuje pytania dopasowane do Twoich bledow</div>
+ <div class="ai-row"><textarea class="ai-inp" id="d-inp" rows="1" placeholder="np. Pytania o zawody..."></textarea><button class="ai-btn" id="d-btn" onclick="ask('d')">Generuj</button></div>
+ <div class="dots" id="d-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+ <div class="ai-out" id="d-out"></div>
+ </div>
+ </div>
 
-  <div class="pane" id="pane-evening">
-    <div class="stats-grid">
-      <div class="sbox"><div class="sbox-val" id="ev-w">0</div><div class="sbox-lbl">slĂłwek</div></div>
-      <div class="sbox"><div class="sbox-val" id="ev-s">0</div><div class="sbox-lbl">dni z rzedu</div></div>
-      <div class="sbox"><div class="sbox-val" id="ev-a">â€”</div><div class="sbox-lbl">skutecznosc</div></div>
-      <div class="sbox"><div class="sbox-val" id="ev-x">0</div><div class="sbox-lbl">XP dzis</div></div>
-    </div>
-    <div class="prog-section">
-      <div class="prog-title">Postep slĂłwek</div>
-      <div id="prog-list"></div>
-    </div>
-    <div class="wlist" id="ev-list"></div>
-    <div class="card">
-      <div class="lc-meta"><span class="tag trev">PowtĂłrka SRS</span><span class="lc-num" id="ev-num">1 z 5</span></div>
-      <div class="w-big" id="ev-word">busy</div>
-      <button class="speak-btn" onclick="speakWord('ev-word')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg>PosĹ‚uchaj</button>
-      <div class="w-def" id="ev-def">zajety</div>
-      <div class="w-ex" id="ev-ex">I am very <b>busy</b> today.</div>
-      <div class="rrow" style="margin-top:1rem">
-        <div class="rbt r0" onclick="rate('ev',0)">Nie pamietam<span>za 5 min</span></div>
-        <div class="rbt" onclick="rate('ev',1)">Prawie<span>jutro</span></div>
-        <div class="rbt r2" onclick="rate('ev',2)">Pamietam<span>za 4 dni</span></div>
-        <div class="rbt r3" onclick="rate('ev',3)">Latwe<span>za 10 dni</span></div>
-      </div>
-    </div>
-  </div>
+ <div class="pane" id="pane-evening">
+ <div class="stats-grid">
+ <div class="sbox"><div class="sbox-val" id="ev-w">0</div><div class="sbox-lbl">slowek</div></div>
+ <div class="sbox"><div class="sbox-val" id="ev-s">0</div><div class="sbox-lbl">dni z rzÄ™du</div></div>
+ <div class="sbox"><div class="sbox-val" id="ev-a"> -- </div><div class="sbox-lbl">skutecznoĹ›Ä‡</div></div>
+ <div class="sbox"><div class="sbox-val" id="ev-x">0</div><div class="sbox-lbl">XP dziĹ›</div></div>
+ </div>
+ <div class="prog-section">
+ <div class="prog-title">PostÄ™p slowek</div>
+ <div id="prog-list"></div>
+ </div>
+ <div class="wlist" id="ev-list"></div>
+ <div class="card">
+ <div class="lc-meta"><span class="tag trev">Powtorka SRS</span><span class="lc-num" id="ev-num">1 z 5</span></div>
+ <div class="w-big" id="ev-word">busy</div>
+ <button class="speak-btn" onclick="speakWord('ev-word')"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg>Posluchaj</button>
+ <div class="w-def" id="ev-def">zajety</div>
+ <div class="w-ex" id="ev-ex">I am very <b>busy</b> today.</div>
+ <div class="rrow" style="margin-top:1rem">
+ <div class="rbt r0" onclick="rate('ev',0)">Nie pamiÄ™tam<span>za 5 min</span></div>
+ <div class="rbt" onclick="rate('ev',1)">Prawie<span>jutro</span></div>
+ <div class="rbt r2" onclick="rate('ev',2)">PamiÄ™tam<span>za 4 dni</span></div>
+ <div class="rbt r3" onclick="rate('ev',3)">Ĺatwe<span>za 10 dni</span></div>
+ </div>
+ </div>
+ </div>
 
-  <div class="pane" id="pane-friday">
-    <div class="notice n-focus"><svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>Praca zdalna Â· tryb skupienia</div>
-    <div class="sec-label">Wybierz tryb piatkowy</div>
-    <div class="focus-grid" id="focus-grid">
-      <div class="fcard sel" onclick="pickFocus(this,'grammar')"><div class="fcard-name">Gramatyka</div><div class="fcard-desc">Czasy, zdania, struktura</div></div>
-      <div class="fcard" onclick="pickFocus(this,'speaking')"><div class="fcard-name">MĂłwienie</div><div class="fcard-desc">Dialogi, wymowa, AI chat</div></div>
-      <div class="fcard" onclick="pickFocus(this,'reading')"><div class="fcard-name">Czytanie</div><div class="fcard-desc">KrĂłtkie teksty A2</div></div>
-      <div class="fcard" onclick="pickFocus(this,'writing')"><div class="fcard-name">Pisanie</div><div class="fcard-desc">Maile, opisy, zdania</div></div>
-    </div>
-    <div class="card">
-      <div class="lc-meta"><span class="tag tfoc" id="fri-tag">Piatek Â· Gramatyka</span><span class="lc-num">sesja skupienia</span></div>
-      <div class="w-big">have got</div><div class="w-ph">/hĂ¦v got/</div><span class="w-pos">czasownik</span>
-      <div class="w-def">miec â€” brytyjski angielski zamiast "have"</div>
-      <div class="w-ex">I <b>have got</b> a new car. = I <b>have</b> a new car.</div>
-      <div class="tip"><div class="tip-lbl">Gramatyka A2</div>Pytanie: "Have you got...?" Â· Przeczenie: "I haven't got..."</div>
-      <div class="rrow">
-        <div class="rbt r0" onclick="rate('fri',0)">Nie znam<span>powtĂłrz</span></div>
-        <div class="rbt" onclick="rate('fri',1)">Prawie<span>jutro</span></div>
-        <div class="rbt r2" onclick="rate('fri',2)">Znam<span>za 3 dni</span></div>
-        <div class="rbt r3" onclick="rate('fri',3)">Latwe!<span>za 7 dni</span></div>
-      </div>
-    </div>
-    <div class="ai-box">
-      <div class="ai-lbl">AI generuje cwiczenia z wybranej kategorii</div>
-      <div class="ai-row"><textarea class="ai-inp" id="fri-inp" rows="1" placeholder="np. UlĂłz 3 zdania z have got..."></textarea><button class="ai-btn" id="fri-btn" onclick="ask('fri')">Zapytaj</button></div>
-      <div class="dots" id="fri-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-      <div class="ai-out" id="fri-out"></div>
-    </div>
-  </div>
+ <div class="pane" id="pane-friday">
+ <div class="notice n-focus"><svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>Praca zdalna Â· tryb skupienia</div>
+ <div class="sec-label">Wybierz tryb piatkowy</div>
+ <div class="focus-grid" id="focus-grid">
+ <div class="fcard sel" onclick="pickFocus(this,'grammar')"><div class="fcard-name">Gramatyka</div><div class="fcard-desc">Czasy, zdania, struktura</div></div>
+ <div class="fcard" onclick="pickFocus(this,'speaking')"><div class="fcard-name">Mowienie</div><div class="fcard-desc">Dialogi, wymowa, AI chat</div></div>
+ <div class="fcard" onclick="pickFocus(this,'reading')"><div class="fcard-name">Czytanie</div><div class="fcard-desc">Krotkie teksty A2</div></div>
+ <div class="fcard" onclick="pickFocus(this,'writing')"><div class="fcard-name">Pisanie</div><div class="fcard-desc">Maile, opisy, zdania</div></div>
+ </div>
+ <div class="card">
+ <div class="lc-meta"><span class="tag tfoc" id="fri-tag">Piatek Â· Gramatyka</span><span class="lc-num">sesja skupienia</span></div>
+ <div class="w-big">have got</div><div class="w-ph">/hĂ¦v got/</div><span class="w-pos">czasownik</span>
+ <div class="w-def">miec - brytyjski angielski zamiast "have"</div>
+ <div class="w-ex">I <b>have got</b> a new car. = I <b>have</b> a new car.</div>
+ <div class="tip"><div class="tip-lbl">Gramatyka A2</div>Pytanie: "Have you got...?" Â· Przeczenie: "I haven't got..."</div>
+ <div class="rrow">
+ <div class="rbt r0" onclick="rate('fri',0)">Nie znam<span>powtorz</span></div>
+ <div class="rbt" onclick="rate('fri',1)">Prawie<span>jutro</span></div>
+ <div class="rbt r2" onclick="rate('fri',2)">Znam<span>za 3 dni</span></div>
+ <div class="rbt r3" onclick="rate('fri',3)">Ĺatwe!<span>za 7 dni</span></div>
+ </div>
+ </div>
+ <div class="ai-box">
+ <div class="ai-lbl">AI generuje Ä‡wiczenia z wybranej kategorii</div>
+ <div class="ai-row"><textarea class="ai-inp" id="fri-inp" rows="1" placeholder="np. Uloz 3 zdania z have got..."></textarea><button class="ai-btn" id="fri-btn" onclick="ask('fri')">Zapytaj</button></div>
+ <div class="dots" id="fri-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+ <div class="ai-out" id="fri-out"></div>
+ </div>
+ </div>
 
-  <div class="pane" id="pane-weekend">
-    <div class="notice n-wk"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>PowtĂłrka tygodnia Â· 1 sesja 20 min Â· aplikacja sie zatrzymuje</div>
-    <div class="wk-timer">
-      <div class="wk-tval" id="wk-tval">20:00</div>
-      <div class="wk-bar-wrap"><div class="wk-bar-fill" id="wk-tbar" style="width:100%"></div></div>
-      <div class="wk-lbl" id="wk-lbl">20 minut</div>
-      <button class="start-btn" id="wk-start" onclick="toggleWkTimer()" style="margin-left:8px">Start</button>
-    </div>
-    <div class="sec-label">SlĂłwka posortowane wg trudnosci</div>
-    <div class="wlist" id="wk-list"></div>
-    <div class="card">
-      <div class="lc-meta"><span class="tag twk">PowtĂłrka tygodnia</span><span class="lc-num" id="wk-num">1 z 5</span></div>
-      <div class="w-big" id="wk-word">careful</div><div class="w-ph">/keÉ™rfÉ™l/</div><span class="w-pos">przymiotnik</span>
-      <div class="w-def" id="wk-def">ostrozny</div>
-      <div class="w-ex" id="wk-ex">Be <b>careful</b> when you drive.</div>
-      <div class="rrow" style="margin-top:1rem">
-        <div class="rbt r0" onclick="rate('wk',0)">Nie pamietam<span>za 5 min</span></div>
-        <div class="rbt" onclick="rate('wk',1)">Prawie<span>jutro</span></div>
-        <div class="rbt r2" onclick="rate('wk',2)">Pamietam<span>za 4 dni</span></div>
-        <div class="rbt r3" onclick="rate('wk',3)">Latwe<span>za tydzien</span></div>
-      </div>
-    </div>
-  </div>
+ <div class="pane" id="pane-weekend">
+ <div class="notice n-wk"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>Powtorka tygodnia Â· 1 sesja 20 min Â· aplikacja sie zatrzymuje</div>
+ <div class="wk-timer">
+ <div class="wk-tval" id="wk-tval">20:00</div>
+ <div class="wk-bar-wrap"><div class="wk-bar-fill" id="wk-tbar" style="width:100%"></div></div>
+ <div class="wk-lbl" id="wk-lbl">20 minut</div>
+ <button class="start-btn" id="wk-start" onclick="toggleWkTimer()" style="margin-left:8px">Start</button>
+ </div>
+ <div class="sec-label">Slowka posortowane wg trudnoĹ›ci</div>
+ <div class="wlist" id="wk-list"></div>
+ <div class="card">
+ <div class="lc-meta"><span class="tag twk">Powtorka tygodnia</span><span class="lc-num" id="wk-num">1 z 5</span></div>
+ <div class="w-big" id="wk-word">careful</div><div class="w-ph">/keÉ™rfÉ™l/</div><span class="w-pos">przymiotnik</span>
+ <div class="w-def" id="wk-def">ostrozny</div>
+ <div class="w-ex" id="wk-ex">Be <b>careful</b> when you drive.</div>
+ <div class="rrow" style="margin-top:1rem">
+ <div class="rbt r0" onclick="rate('wk',0)">Nie pamiÄ™tam<span>za 5 min</span></div>
+ <div class="rbt" onclick="rate('wk',1)">Prawie<span>jutro</span></div>
+ <div class="rbt r2" onclick="rate('wk',2)">PamiÄ™tam<span>za 4 dni</span></div>
+ <div class="rbt r3" onclick="rate('wk',3)">Ĺatwe<span>za tydzieĹ„</span></div>
+ </div>
+ </div>
+ </div>
 
-  <div class="pane" id="pane-bonus">
-    <div style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6">Wolna chwila? Wybierz typ â€” AI dobierze material do Twojego poziomu.</div>
-    <div class="bonus-grid">
-      <div class="bcard sel" onclick="pickBonus(this,'extra')">
-        <div class="bcard-head"><div class="bcard-ico" style="background:rgba(212,83,126,.15);color:#e06090"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></div><div class="bcard-name">Extra slĂłwka</div></div>
-        <div class="bcard-desc">Nowe slĂłwka A2 ktĂłrych nie widziaĹ‚es</div><div class="bcard-time">5â€“10 min</div>
-      </div>
-      <div class="bcard" onclick="pickBonus(this,'phrases')">
-        <div class="bcard-head"><div class="bcard-ico" style="background:rgba(56,224,164,.12);color:var(--accent2)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div><div class="bcard-name">Zwroty dnia</div></div>
-        <div class="bcard-desc">Gotowe zdania do codziennych sytuacji</div><div class="bcard-time">5 min</div>
-      </div>
-      <div class="bcard" onclick="pickBonus(this,'listen')">
-        <div class="bcard-head"><div class="bcard-ico" style="background:rgba(79,124,255,.12);color:var(--accent)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div><div class="bcard-name">Mini dialog</div></div>
-        <div class="bcard-desc">KrĂłtki dialog â€” przeczytaj i odpowiedz</div><div class="bcard-time">5â€“8 min</div>
-      </div>
-      <div class="bcard" onclick="pickBonus(this,'challenge')">
-        <div class="bcard-head"><div class="bcard-ico" style="background:rgba(255,179,71,.1);color:var(--warn)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg></div><div class="bcard-name">Wyzwanie</div></div>
-        <div class="bcard-desc">AI zadaje trudniejsze pytania</div><div class="bcard-time">10 min</div>
-      </div>
-    </div>
-    <div class="ai-box">
-      <div class="ai-lbl" id="bonus-lbl">Extra slĂłwka â€” AI generuje dla Ciebie</div>
-      <div class="ai-row"><textarea class="ai-inp" id="b-inp" rows="1" placeholder="lub wpisz wlasne zyczenie..."></textarea><button class="ai-btn" id="b-btn" onclick="ask('b')">Start</button></div>
-      <div class="dots" id="b-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-      <div class="ai-out" id="b-out"></div>
-    </div>
-  </div>
+ <div class="pane" id="pane-bonus">
+ <div style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6">Wolna chwila? Wybierz typ - AI dobierze material do Twojego poziomu.</div>
+ <div class="bonus-grid">
+ <div class="bcard sel" onclick="pickBonus(this,'extra')">
+ <div class="bcard-head"><div class="bcard-ico" style="background:rgba(212,83,126,.15);color:#e06090"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></div><div class="bcard-name">Extra slowka</div></div>
+ <div class="bcard-desc">Nowe slowka A2 ktorych nie widziales</div><div class="bcard-time">5â€“10 min</div>
+ </div>
+ <div class="bcard" onclick="pickBonus(this,'phrases')">
+ <div class="bcard-head"><div class="bcard-ico" style="background:rgba(56,224,164,.12);color:var(--accent2)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div><div class="bcard-name">Zwroty dnia</div></div>
+ <div class="bcard-desc">Gotowe zdania do codziennych sytuacji</div><div class="bcard-time">5 min</div>
+ </div>
+ <div class="bcard" onclick="pickBonus(this,'listen')">
+ <div class="bcard-head"><div class="bcard-ico" style="background:rgba(79,124,255,.12);color:var(--accent)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div><div class="bcard-name">Mini dialog</div></div>
+ <div class="bcard-desc">Krotki dialog - przeczytaj i odpowiedz</div><div class="bcard-time">5â€“8 min</div>
+ </div>
+ <div class="bcard" onclick="pickBonus(this,'challenge')">
+ <div class="bcard-head"><div class="bcard-ico" style="background:rgba(255,179,71,.1);color:var(--warn)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg></div><div class="bcard-name">Wyzwanie</div></div>
+ <div class="bcard-desc">AI zadaje trudniejsze pytania</div><div class="bcard-time">10 min</div>
+ </div>
+ </div>
+ <div class="ai-box">
+ <div class="ai-lbl" id="bonus-lbl">Extra slowka - AI generuje dla Ciebie</div>
+ <div class="ai-row"><textarea class="ai-inp" id="b-inp" rows="1" placeholder="lub wpisz wlasne zyczenie..."></textarea><button class="ai-btn" id="b-btn" onclick="ask('b')">Start</button></div>
+ <div class="dots" id="b-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+ <div class="ai-out" id="b-out"></div>
+ </div>
+ </div>
 </div>
 
 <!-- FEEDBACK BAR -->
 <div class="fb-bar" id="fb-bar">
-  <div class="fb-inner ok" id="fb-inner">
-    <div class="fb-text" id="fb-text">Swietnie!</div>
-    <button class="fb-next" id="fb-next" onclick="hideFeedback()">Dalej â†’</button>
-  </div>
+ <div class="fb-inner ok" id="fb-inner">
+ <div class="fb-text" id="fb-text">Ĺšwietnie!</div>
+ <button class="fb-next" id="fb-next" onclick="hideFeedback()">Dalej â†’</button>
+ </div>
 </div>
 
-<!-- EKRAN KOĹCA SESJI -->
+<!-- EKRAN KONCA SESJI -->
 <div class="session-end" id="session-end" style="padding:12px 10px">
-  <div class="se-emoji" id="se-emoji">đźŽ‰</div>
-  <div class="se-title" id="se-title">Sesja skonczona!</div>
-  <div class="se-sub" id="se-sub">Swietna robota â€” wrĂłc wieczorem na powtĂłrke!</div>
-  <div class="se-stars" id="se-stars">â­â­â­</div>
-  <div class="se-stats">
-    <div class="ses-box"><div class="ses-val" style="color:var(--warn)" id="se-xp">0</div><div class="ses-lbl">XP</div></div>
-    <div class="ses-box"><div class="ses-val" style="color:var(--accent2)" id="se-words">0</div><div class="ses-lbl">SlĂłwek</div></div>
-    <div class="ses-box"><div class="ses-val" style="color:var(--accent)" id="se-streak">0</div><div class="ses-lbl">Dni z rz.</div></div>
-  </div>
-  <button class="se-btn primary" onclick="continueSession()" id="se-continue">+ Wiecej slĂłwek (AI)</button>
-  <button class="se-btn secondary" onclick="goNav('evening')">Przejdz do wieczornej powtĂłrki</button>
+ <div class="se-emoji" id="se-emoji">đźŽ‰</div>
+ <div class="se-title" id="se-title">Sesja skoĹ„czona!</div>
+ <div class="se-sub" id="se-sub">Ĺšwietna robota - wroc wieczorem na powtorke!</div>
+ <div class="se-stars" id="se-stars">â­â­â­</div>
+ <div class="se-stats">
+ <div class="ses-box"><div class="ses-val" style="color:var(--warn)" id="se-xp">0</div><div class="ses-lbl">XP</div></div>
+ <div class="ses-box"><div class="ses-val" style="color:var(--accent2)" id="se-words">0</div><div class="ses-lbl">Slowek</div></div>
+ <div class="ses-box"><div class="ses-val" style="color:var(--accent)" id="se-streak">0</div><div class="ses-lbl">Dni z rz.</div></div>
+ </div>
+ <button class="se-btn primary" onclick="continueSession()" id="se-continue">+ WiÄ™cej slowek (AI)</button>
+ <button class="se-btn secondary" onclick="goNav('evening')">PrzejdĹş do wieczornej powtorki</button>
 </div>
 
 <script>
@@ -465,126 +465,126 @@ const SB_KEY='sb_publishable_BHCshXcTbj_574ux7Kd9tQ_--NmJXhs';
 const sb=supabase.createClient(SB_URL,SB_KEY);
 let currentUser=null,authMode='login';
 
-function switchTab(m){authMode=m;document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&m==='login')||(i===1&&m==='register')));document.getElementById('auth-btn').textContent=m==='login'?'Zaloguj sie':'Zarejestruj sie';document.getElementById('auth-msg').textContent='';}
+function switchTab(m){authMode=m;document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&m==='login')||(i===1&&m==='register')));document.getElementById('auth-btn').textContent=m==='login'?'Zaloguj siÄ™':'Zarejestruj siÄ™';document.getElementById('auth-msg').textContent='';}
 
 async function authAction(){
-  const email=document.getElementById('auth-email').value.trim(),pass=document.getElementById('auth-pass').value;
-  const msg=document.getElementById('auth-msg'),btn=document.getElementById('auth-btn');
-  if(!email||!pass){msg.textContent='Wpisz email i haslo';msg.className='auth-msg err';return;}
-  btn.disabled=true;msg.textContent='';
-  try{
-    const res=authMode==='login'?await sb.auth.signInWithPassword({email,password:pass}):await sb.auth.signUp({email,password:pass});
-    if(res.error)throw res.error;
-    if(authMode==='register'&&!res.data.session){msg.textContent='Sprawdz skrzynke â€” link weryfikacyjny wyslany!';msg.className='auth-msg ok';}
-    else if(res.data.session){currentUser=res.data.user;document.getElementById('user-email').textContent=currentUser.email;await initApp();}
-  }catch(e){msg.textContent=e.message==='Invalid login credentials'?'Nieprawidlowy email lub haslo':e.message;msg.className='auth-msg err';}
-  btn.disabled=false;
+ const email=document.getElementById('auth-email').value.trim(),pass=document.getElementById('auth-pass').value;
+ const msg=document.getElementById('auth-msg'),btn=document.getElementById('auth-btn');
+ if(!email||!pass){msg.textContent='Wpisz email i hasĹ‚o';msg.className='auth-msg err';return;}
+ btn.disabled=true;msg.textContent='';
+ try{
+ const res=authMode==='login'?await sb.auth.signInWithPassword({email,password:pass}):await sb.auth.signUp({email,password:pass});
+ if(res.error)throw res.error;
+ if(authMode==='register'&&!res.data.session){msg.textContent='SprawdĹş skrzynkÄ™ - link weryfikacyjny wysĹ‚any!';msg.className='auth-msg ok';}
+ else if(res.data.session){currentUser=res.data.user;document.getElementById('user-email').textContent=currentUser.email;await initApp();}
+ }catch(e){msg.textContent=e.message==='Invalid login credentials'?'NieprawidĹ‚owy email lub hasĹ‚o':e.message;msg.className='auth-msg err';}
+ btn.disabled=false;
 }
 
 async function logout(){await sb.auth.signOut();currentUser=null;document.getElementById('app-screen').style.display='none';document.getElementById('auth-screen').style.display='flex';}
 
 const WORDS=[
-  {w:'busy',ph:'/bizi/',pos:'przymiotnik',def:'zajety â€” nie masz czasu',ex:'I am very <b>busy</b> at work.',tip:'Nie myl z "dizzy" (zawroty glowy)!',tag:'A2'},
-  {w:'tired',ph:'/tajerd/',pos:'przymiotnik',def:'zmeczony â€” chcesz odpoczac',ex:'She is <b>tired</b> after the drive.',tip:'"Tired of" = mam dosc czegos.',tag:'A2'},
-  {w:'early',ph:'/erli/',pos:'przyslĂłwek',def:'wczesnie â€” przed normalnym czasem',ex:'He wakes up <b>early</b> every day.',tip:'"Early bird" = ranny ptaszek!',tag:'A2'},
-  {w:'hungry',ph:'/hangri/',pos:'przymiotnik',def:'glodny â€” chcesz zjesc',ex:'I am really <b>hungry</b> now!',tip:'"Hungry for success" â€” tez przenosnie.',tag:'A2'},
-  {w:'careful',ph:'/keÉ™rfÉ™l/',pos:'przymiotnik',def:'ostrozny â€” uwazasz co robisz',ex:'Be <b>careful</b> when you drive.',tip:'"Be careful!" = uwazaj!',tag:'A2'},
-  {w:'meeting',ph:'/miiting/',pos:'rzeczownik',def:'spotkanie â€” rozmawiasz z innymi w pracy',ex:'I have a <b>meeting</b> at 10 AM.',tip:'"Meeting" to spotkanie, nie "spotykanie".',tag:'A2'},
-  {w:'deadline',ph:'/dedlajn/',pos:'rzeczownik',def:'termin â€” ostatni dzien oddania pracy',ex:'The <b>deadline</b> is on Friday.',tip:'Dead + line = linia smierci â€” nie przekrocz!',tag:'A2'},
-  {w:'colleague',ph:'/koliig/',pos:'rzeczownik',def:'kolega z pracy â€” pracujecie razem',ex:'My <b>colleague</b> helped me today.',tip:'Nie myl z "college" (uczelnia)!',tag:'A2'},
-  {w:'schedule',ph:'/skediul/',pos:'rzeczownik',def:'harmonogram â€” plan na dzien lub tydzien',ex:'Check my <b>schedule</b> for tomorrow.',tip:'Brytyjskie wymowa: /shediul/.',tag:'A2'},
-  {w:'urgent',ph:'/erdĹĽent/',pos:'przymiotnik',def:'pilny â€” trzeba zrobic natychmiast',ex:'This email is very <b>urgent</b>.',tip:'"It is urgent" = to jest pilne.',tag:'A2'},
-  {w:'traffic',ph:'/trĂ¦fik/',pos:'rzeczownik',def:'korki, ruch uliczny â€” samochody na drodze',ex:'There is heavy <b>traffic</b> on the motorway.',tip:'"Traffic jam" = korek.',tag:'A2'},
-  {w:'commute',ph:'/kemjuut/',pos:'czasownik/rzeczownik',def:'dojezdzac do pracy â€” codzienna jazda',ex:'My <b>commute</b> takes 2 hours.',tip:'"Commuter" = osoba dojeĹĽdĹĽajaca do pracy.',tag:'A2'},
-  {w:'motorway',ph:'/mooterwej/',pos:'rzeczownik',def:'autostrada â€” szybka droga',ex:'Drive on the <b>motorway</b> to save time.',tip:'US: "highway" lub "freeway".',tag:'A2'},
-  {w:'roundabout',ph:'/raundebaut/',pos:'rzeczownik',def:'rondo â€” okragly skrzyzowanie',ex:'Turn left at the <b>roundabout</b>.',tip:'US: "traffic circle".',tag:'A2'},
-  {w:'lane',ph:'/lejn/',pos:'rzeczownik',def:'pas ruchu â€” czesc drogi dla jednego auta',ex:'Stay in the left <b>lane</b>.',tip:'"Fast lane" = lewy pas, szybki.',tag:'A2'},
-  {w:'delayed',ph:'/dileid/',pos:'przymiotnik',def:'opĂłzniony â€” nie na czas',ex:'The train is <b>delayed</b> by 20 minutes.',tip:'"Delay" (rzeczownik) = opĂłznienie.',tag:'A2'},
-  {w:'petrol',ph:'/petrel/',pos:'rzeczownik',def:'paliwo, benzyna',ex:'I need to fill up with <b>petrol</b>.',tip:'US: "gas" lub "gasoline".',tag:'A2'},
-  {w:'invoice',ph:'/inwois/',pos:'rzeczownik',def:'faktura â€” dokument do zaplaty',ex:'Please send me the <b>invoice</b>.',tip:'Czasownik: "to invoice" = wystawic fakture.',tag:'A2'},
-  {w:'reply',ph:'/riplaj/',pos:'czasownik',def:'odpowiedziec â€” napisac odpowiedz',ex:'Please <b>reply</b> to my email.',tip:'"Reply all" = odpowiedz wszystkim.',tag:'A2'},
-  {w:'attached',ph:'/etĂ¦czd/',pos:'przymiotnik',def:'zalaczony â€” plik w emailu',ex:'Please find the document <b>attached</b>.',tip:'"Please find attached" â€” klasyczne zdanie w emailu.',tag:'A2'},
-  {w:'available',ph:'/ewejlebl/',pos:'przymiotnik',def:'dostepny â€” mozna sie spotkac lub kupic',ex:'Are you <b>available</b> on Monday?',tip:'"I am not available" = nie moge, jestem zajety.',tag:'A2'},
-  {w:'confirm',ph:'/konferm/',pos:'czasownik',def:'potwierdzic â€” powiedziec ze sie zgadzasz',ex:'Please <b>confirm</b> your attendance.',tip:'"Confirmation" = potwierdzenie.',tag:'A2'},
-  {w:'presentation',ph:'/prezentejszyn/',pos:'rzeczownik',def:'prezentacja â€” pokazujesz projekt innym',ex:'I have a big <b>presentation</b> tomorrow.',tip:'"Give a presentation" = robic prezentacje.',tag:'A2'},
-  {w:'promote',ph:'/premoot/',pos:'czasownik',def:'awansowac â€” dostac lepsze stanowisko',ex:'She was <b>promoted</b> to manager.',tip:'"Promotion" = awans.',tag:'A2'},
-  {w:'salary',ph:'/sĂ¦leri/',pos:'rzeczownik',def:'pensja â€” pieniadze za prace miesieczna',ex:'His <b>salary</b> is quite good.',tip:'"Wages" = wyplata tygodniowa/godzinowa.',tag:'A2'},
-  {w:'remote',ph:'/rimoot/',pos:'przymiotnik',def:'zdalny â€” praca z domu',ex:'I work <b>remote</b> on Fridays.',tip:'"Remote work" = praca zdalna.',tag:'A2'},
-  {w:'department',ph:'/dipaartment/',pos:'rzeczownik',def:'dzial â€” czesc firmy np. marketing',ex:'She works in the HR <b>department</b>.',tip:'"Dept." = skrĂłt.',tag:'A2'},
-  {w:'report',ph:'/ripoot/',pos:'rzeczownik',def:'raport â€” dokument z wynikami',ex:'I need to write a <b>report</b> by Monday.',tip:'"Report to someone" = podlegac komus.',tag:'A2'},
-  {w:'improve',ph:'/impruuv/',pos:'czasownik',def:'poprawiac â€” robic cos lepiej',ex:'I want to <b>improve</b> my English.',tip:'"Improvement" = poprawa, postep.',tag:'A2'},
-  {w:'frustrated',ph:'/frastrejted/',pos:'przymiotnik',def:'sfrustrowany â€” zdenerwowany gdy cos nie wychodzi',ex:'I feel <b>frustrated</b> with the traffic.',tip:'"Frustrating" opisuje sytuacje, nie osobe.',tag:'A2'},
-  {w:'responsible',ph:'/risponsybl/',pos:'przymiotnik',def:'odpowiedzialny â€” dbasz o cos',ex:'She is <b>responsible</b> for the project.',tip:'"Take responsibility" = wziac odpowiedzialnosc.',tag:'A2'},
-  {w:'flexible',ph:'/fleksybl/',pos:'przymiotnik',def:'elastyczny â€” mozna zmieniac plany',ex:'My working hours are <b>flexible</b>.',tip:'"Flexibility" = elastycznosc.',tag:'A2'},
-  {w:'efficient',ph:'/yfyszent/',pos:'przymiotnik',def:'wydajny â€” robisz duzo w krotkim czasie',ex:'She is very <b>efficient</b> at work.',tip:'"Efficiently" = wydajnie (przyslĂłwek).',tag:'A2'},
-  {w:'customer',ph:'/kastemer/',pos:'rzeczownik',def:'klient â€” osoba ktora kupuje',ex:'The <b>customer</b> is always right.',tip:'"Client" = klient dlugoterminowy.',tag:'A2'},
-  {w:'feedback',ph:'/fidbĂ¦k/',pos:'rzeczownik',def:'informacja zwrotna â€” opinia o twojej pracy',ex:'Can I give you some <b>feedback</b>?',tip:'"Positive/negative feedback" = pozytywna/negatywna opinia.',tag:'A2'},
-  {w:'achieve',ph:'/ecziiv/',pos:'czasownik',def:'osiagnac â€” zrealizowac cel',ex:'I want to <b>achieve</b> my goals.',tip:'"Achievement" = osiagniecie.',tag:'A2'},
-  {w:'challenge',ph:'/czĂ¦lyndĹĽ/',pos:'rzeczownik',def:'wyzwanie â€” trudna, ale mozliwa do wykonania rzecz',ex:'This project is a real <b>challenge</b>.',tip:'"Challenging" = wymagajacy.',tag:'A2'},
-  {w:'support',ph:'/sepoot/',pos:'czasownik',def:'wspierac â€” pomagac komus',ex:'My team always <b>supports</b> me.',tip:'"Support" tez rzeczownik: "offer support".',tag:'A2'},
-  {w:'manage',ph:'/mĂ¦nydĹĽ/',pos:'czasownik',def:'zarzadzac lub poradzic sobie',ex:'Can you <b>manage</b> the project?',tip:'"I can manage" = poradze sobie.',tag:'A2'},
-  {w:'polite',ph:'/pelait/',pos:'przymiotnik',def:'grzeczny, uprzejmy â€” zachowujesz sie dobrze',ex:'Always be <b>polite</b> to customers.',tip:'"Politely" = grzecznie (przyslĂłwek).',tag:'A2'},
-  {w:'nervous',ph:'/nervys/',pos:'przymiotnik',def:'zdenerwowany â€” czujesz niepokĂłj przed czyms',ex:'I am <b>nervous</b> before presentations.',tip:'"Nervous" nie znaczy "nerwowy z natury"!',tag:'A2'},
-  {w:'confident',ph:'/konfydent/',pos:'przymiotnik',def:'pewny siebie â€” wierzysz w swoje mozliwosci',ex:'She is very <b>confident</b> in English.',tip:'"Confidence" = pewnosc siebie.',tag:'A2'},
-  {w:'apologise',ph:'/epolydĹĽajz/',pos:'czasownik',def:'przeprosic â€” wyrazic ze zrobiles cos zle',ex:'I apologise for being late.',tip:'US: "apologize" z z. "Sorry" = nieformalne.',tag:'A2'},
-  {w:'suggest',ph:'/sedĹĽest/',pos:'czasownik',def:'zaproponowac â€” masz pomysl dla kogos',ex:'I <b>suggest</b> meeting on Tuesday.',tip:'"I suggest + ing": I suggest going.',tag:'A2'},
-  {w:'arrange',ph:'/ereyndĹĽ/',pos:'czasownik',def:'zorganizowac â€” zaplanowac cos z wyprzedzeniem',ex:'Can you <b>arrange</b> the meeting?',tip:'"Arrangement" = ustalenia, plan.',tag:'A2'},
-  {w:'cancel',ph:'/kĂ¦nsel/',pos:'czasownik',def:'odwolac â€” anulowac spotkanie lub plan',ex:'We had to <b>cancel</b> the meeting.',tip:'"Cancellation" = odwolanie.',tag:'A2'},
-  {w:'remind',ph:'/rimaind/',pos:'czasownik',def:'przypomniec â€” powiedziec komus o czyms',ex:'Please <b>remind</b> me about the call.',tip:'"Reminder" = przypomnienie.',tag:'A2'},
-  {w:'concentrate',ph:'/konsentreit/',pos:'czasownik',def:'koncentrowac sie â€” skupiac uwage na czyms',ex:'It is hard to <b>concentrate</b> in traffic.',tip:'"Concentrate on" = skupic sie na.',tag:'A2'},
-  {w:'estimate',ph:'/estymejt/',pos:'czasownik',def:'szacowac â€” przyblizony czas lub koszt',ex:'I <b>estimate</b> 2 hours for this task.',tip:'"Estimate" tez rzeczownik: "give an estimate".',tag:'A2'},
-  {w:'require',ph:'/rikwajer/',pos:'czasownik',def:'wymagac â€” cos jest potrzebne lub obowiazkowe',ex:'This job <b>requires</b> good English.',tip:'"Requirement" = wymaganie.',tag:'A2'},
-  {w:'permit',ph:'/permyt/',pos:'czasownik',def:'pozwolic â€” dac zgode na cos',ex:'Smoking is not <b>permitted</b> here.',tip:'"Permission" = pozwolenie.',tag:'A2'},
-  {w:'reduce',ph:'/ridjuus/',pos:'czasownik',def:'zmniejszyc â€” obnizyc ilosc lub koszt',ex:'We need to <b>reduce</b> costs.',tip:'"Reduction" = redukcja, obnizka.',tag:'A2'},
-  {w:'increase',ph:'/inkriis/',pos:'czasownik',def:'zwiekszac â€” podnosic ilosc lub wartosc',ex:'Sales <b>increased</b> by 10%.',tip:'"Increase" tez rzeczownik: "a big increase".',tag:'A2'},
-  {w:'update',ph:'/apdejt/',pos:'czasownik',def:'aktualizowac â€” dawac nowe informacje',ex:'Please <b>update</b> me on the project.',tip:'"What is the update?" = co nowego?',tag:'A2'},
-  {w:'approve',ph:'/epruuv/',pos:'czasownik',def:'zatwierdzic â€” oficjalnie zgodzic sie',ex:'The manager needs to <b>approve</b> this.',tip:'"Approval" = zatwierdzenie, aprobata.',tag:'A2'},
-  {w:'process',ph:'/proses/',pos:'rzeczownik',def:'proces â€” seria krokow do wykonania',ex:'What is the <b>process</b> for this?',tip:'"Process" tez czasownik: "process a request".',tag:'A2'},
-  {w:'issue',ph:'/yszuu/',pos:'rzeczownik',def:'problem lub kwestia do omĂłwienia',ex:'We have an <b>issue</b> with the system.',tip:'Bardziej formalne niz "problem".',tag:'A2'},
-  {w:'handle',ph:'/hĂ¦ndl/',pos:'czasownik',def:'zajac sie czyms â€” poradzic sobie z zadaniem',ex:'Can you <b>handle</b> this request?',tip:'"Handle" = radzic sobie z czyms.',tag:'A2'},
-  {w:'complete',ph:'/kompliit/',pos:'czasownik',def:'ukonczyc â€” skonczyc zadanie w calosci',ex:'I need to <b>complete</b> this by Friday.',tip:'"Completion" = zakonczenie.',tag:'A2'},
-  {w:'launch',ph:'/looncz/',pos:'czasownik',def:'uruchomic, wprowadzic â€” zaczac nowy projekt',ex:'We will <b>launch</b> the product next month.',tip:'"Product launch" = premiera produktu.',tag:'A2'},
+ {w:'busy',ph:'/bizi/',pos:'przymiotnik',def:'zajety - nie masz czasu',ex:'I am very <b>busy</b> at work.',tip:'Nie myl z "dizzy" (zawroty gĹ‚owy)!',tag:'A2'},
+ {w:'tired',ph:'/tajerd/',pos:'przymiotnik',def:'zmeczony - chcesz odpoczac',ex:'She is <b>tired</b> after the drive.',tip:'"Tired of" = mam doĹ›Ä‡ czegoĹ›.',tag:'A2'},
+ {w:'early',ph:'/erli/',pos:'przyslowek',def:'wczesnie - przed normalnym czasem',ex:'He wakes up <b>early</b> every day.',tip:'"Early bird" = ranny ptaszek!',tag:'A2'},
+ {w:'hungry',ph:'/hangri/',pos:'przymiotnik',def:'glodny - chcesz zjesc',ex:'I am really <b>hungry</b> now!',tip:'"Hungry for success" - tez przenoĹ›nie.',tag:'A2'},
+ {w:'careful',ph:'/keÉ™rfÉ™l/',pos:'przymiotnik',def:'ostrozny - uwazasz co robisz',ex:'Be <b>careful</b> when you drive.',tip:'"Be careful!" = uwaĹĽaj!',tag:'A2'},
+ {w:'meeting',ph:'/miiting/',pos:'rzeczownik',def:'spotkanie - rozmawiasz z innymi w pracy',ex:'I have a <b>meeting</b> at 10 AM.',tip:'"Meeting" to spotkanie, nie "spotykanie".',tag:'A2'},
+ {w:'deadline',ph:'/dedlajn/',pos:'rzeczownik',def:'termin - ostatni dzien oddania pracy',ex:'The <b>deadline</b> is on Friday.',tip:'Dead + line = linia smierci - nie przekrocz!',tag:'A2'},
+ {w:'colleague',ph:'/koliig/',pos:'rzeczownik',def:'kolega z pracy - pracujecie razem',ex:'My <b>colleague</b> helped me today.',tip:'Nie myl z "college" (uczelnia)!',tag:'A2'},
+ {w:'schedule',ph:'/skediul/',pos:'rzeczownik',def:'harmonogram - plan na dzien lub tydzieĹ„',ex:'Check my <b>schedule</b> for tomorrow.',tip:'Brytyjska wymowa: /shediul/.',tag:'A2'},
+ {w:'urgent',ph:'/erdzent/',pos:'przymiotnik',def:'pilny - trzeba zrobic natychmiast',ex:'This email is very <b>urgent</b>.',tip:'"It is urgent" = to jest pilne.',tag:'A2'},
+ {w:'traffic',ph:'/trĂ¦fik/',pos:'rzeczownik',def:'korki, ruch uliczny - samochody na drodze',ex:'There is heavy <b>traffic</b> on the motorway.',tip:'"Traffic jam" = korek.',tag:'A2'},
+ {w:'commute',ph:'/kemjuut/',pos:'czasownik/rzeczownik',def:'dojezdzac do pracy - codzienna jazda',ex:'My <b>commute</b> takes 2 hours.',tip:'"Commuter" = osoba dojezdzajaca do pracy.',tag:'A2'},
+ {w:'motorway',ph:'/mooterwej/',pos:'rzeczownik',def:'autostrada - szybka droga',ex:'Drive on the <b>motorway</b> to save time.',tip:'US: "highway" lub "freeway".',tag:'A2'},
+ {w:'roundabout',ph:'/raundebaut/',pos:'rzeczownik',def:'rondo - okragly skrzyzowanie',ex:'Turn left at the <b>roundabout</b>.',tip:'US: "traffic circle".',tag:'A2'},
+ {w:'lane',ph:'/lejn/',pos:'rzeczownik',def:'pas ruchu - czesc drogi dla jednego auta',ex:'Stay in the left <b>lane</b>.',tip:'"Fast lane" = lewy pas, szybki.',tag:'A2'},
+ {w:'delayed',ph:'/dileid/',pos:'przymiotnik',def:'opozniony - nie na czas',ex:'The train is <b>delayed</b> by 20 minutes.',tip:'"Delay" (rzeczownik) = opoznienie.',tag:'A2'},
+ {w:'petrol',ph:'/petrel/',pos:'rzeczownik',def:'paliwo, benzyna',ex:'I need to fill up with <b>petrol</b>.',tip:'US: "gas" lub "gasoline".',tag:'A2'},
+ {w:'invoice',ph:'/inwois/',pos:'rzeczownik',def:'faktura - dokument do zaplaty',ex:'Please send me the <b>invoice</b>.',tip:'Czasownik: "to invoice" = wystawiÄ‡ fakturÄ™.',tag:'A2'},
+ {w:'reply',ph:'/riplaj/',pos:'czasownik',def:'odpowiedziec - napisac odpowiedz',ex:'Please <b>reply</b> to my email.',tip:'"Reply all" = odpowiedĹş wszystkim.',tag:'A2'},
+ {w:'attached',ph:'/etĂ¦czd/',pos:'przymiotnik',def:'zalaczony - plik w emailu',ex:'Please find the document <b>attached</b>.',tip:'"Please find attached" - klasyczne zdanie w emailu.',tag:'A2'},
+ {w:'available',ph:'/ewejlebl/',pos:'przymiotnik',def:'dostÄ™pny - moĹĽna sie spotkac lub kupic',ex:'Are you <b>available</b> on Monday?',tip:'"I am not available" = nie mogÄ™, jestem zajÄ™ty.',tag:'A2'},
+ {w:'confirm',ph:'/konferm/',pos:'czasownik',def:'potwierdzic - powiedziec ze sie zgadzasz',ex:'Please <b>confirm</b> your attendance.',tip:'"Confirmation" = potwierdzenie.',tag:'A2'},
+ {w:'presentation',ph:'/prezentejszyn/',pos:'rzeczownik',def:'prezentacja - pokazujesz projekt innym',ex:'I have a big <b>presentation</b> tomorrow.',tip:'"Give a presentation" = robiÄ‡ prezentacjÄ™.',tag:'A2'},
+ {w:'promote',ph:'/premoot/',pos:'czasownik',def:'awansowac - dostac lepsze stanowisko',ex:'She was <b>promoted</b> to manager.',tip:'"Promotion" = awans.',tag:'A2'},
+ {w:'salary',ph:'/sĂ¦leri/',pos:'rzeczownik',def:'pensja - pieniadze za prace miesieczna',ex:'His <b>salary</b> is quite good.',tip:'"Wages" = wypĹ‚ata tygodniowa/godzinowa.',tag:'A2'},
+ {w:'remote',ph:'/rimoot/',pos:'przymiotnik',def:'zdalny - praca z domu',ex:'I work <b>remote</b> on Fridays.',tip:'"Remote work" = praca zdalna.',tag:'A2'},
+ {w:'department',ph:'/dipaartment/',pos:'rzeczownik',def:'dzial - czesc firmy np. marketing',ex:'She works in the HR <b>department</b>.',tip:'"Dept." = skrot.',tag:'A2'},
+ {w:'report',ph:'/ripoot/',pos:'rzeczownik',def:'raport - dokument z wynikami',ex:'I need to write a <b>report</b> by Monday.',tip:'"Report to someone" = podlegaÄ‡ komuĹ›.',tag:'A2'},
+ {w:'improve',ph:'/impruuv/',pos:'czasownik',def:'poprawiac - robic cos lepiej',ex:'I want to <b>improve</b> my English.',tip:'"Improvement" = poprawa, postÄ™p.',tag:'A2'},
+ {w:'frustrated',ph:'/frastrejted/',pos:'przymiotnik',def:'sfrustrowany - zdenerwowany gdy cos nie wychodzi',ex:'I feel <b>frustrated</b> with the traffic.',tip:'"Frustrating" opisuje sytuacjÄ™, nie osobÄ™.',tag:'A2'},
+ {w:'responsible',ph:'/risponsybl/',pos:'przymiotnik',def:'odpowiedzialny - dbasz o cos',ex:'She is <b>responsible</b> for the project.',tip:'"Take responsibility" = wziÄ…Ä‡ odpowiedzialnoĹ›Ä‡.',tag:'A2'},
+ {w:'flexible',ph:'/fleksybl/',pos:'przymiotnik',def:'elastyczny - moĹĽna zmieniac plany',ex:'My working hours are <b>flexible</b>.',tip:'"Flexibility" = elastycznoĹ›Ä‡.',tag:'A2'},
+ {w:'efficient',ph:'/yfyszent/',pos:'przymiotnik',def:'wydajny - robisz duzo w krotkim czasie',ex:'She is very <b>efficient</b> at work.',tip:'"Efficiently" = wydajnie (przyslowek).',tag:'A2'},
+ {w:'customer',ph:'/kastemer/',pos:'rzeczownik',def:'klient - osoba ktora kupuje',ex:'The <b>customer</b> is always right.',tip:'"Client" = klient dĹ‚ugoterminowy.',tag:'A2'},
+ {w:'feedback',ph:'/fidbĂ¦k/',pos:'rzeczownik',def:'informacja zwrotna - opinia o twojej pracy',ex:'Can I give you some <b>feedback</b>?',tip:'"Positive/negative feedback" = pozytywna/negatywna opinia.',tag:'A2'},
+ {w:'achieve',ph:'/ecziiv/',pos:'czasownik',def:'osiagnac - zrealizowac cel',ex:'I want to <b>achieve</b> my goals.',tip:'"Achievement" = osiÄ…gniÄ™cie.',tag:'A2'},
+ {w:'challenge',ph:'/czĂ¦lyndz/',pos:'rzeczownik',def:'wyzwanie - trudna, ale moĹĽliwa do wykonania rzecz',ex:'This project is a real <b>challenge</b>.',tip:'"Challenging" = wymagajÄ…cy.',tag:'A2'},
+ {w:'support',ph:'/sepoot/',pos:'czasownik',def:'wspierac - pomagac komus',ex:'My team always <b>supports</b> me.',tip:'"Support" teĹĽ rzeczownik: "offer support".',tag:'A2'},
+ {w:'manage',ph:'/mĂ¦nydz/',pos:'czasownik',def:'zarzÄ…dzaÄ‡ lub poradziÄ‡ sobie',ex:'Can you <b>manage</b> the project?',tip:'"I can manage" = poradzÄ™ sobie.',tag:'A2'},
+ {w:'polite',ph:'/pelait/',pos:'przymiotnik',def:'grzeczny, uprzejmy - zachowujesz sie dobrze',ex:'Always be <b>polite</b> to customers.',tip:'"Politely" = grzecznie (przyslowek).',tag:'A2'},
+ {w:'nervous',ph:'/nervys/',pos:'przymiotnik',def:'zdenerwowany - czujesz niepokoj przed czyms',ex:'I am <b>nervous</b> before presentations.',tip:'"Nervous" nie znaczy "nerwowy z natury"!',tag:'A2'},
+ {w:'confident',ph:'/konfydent/',pos:'przymiotnik',def:'pewny siebie - wierzysz w swoje moĹĽliwoĹ›ci',ex:'She is very <b>confident</b> in English.',tip:'"Confidence" = pewnoĹ›Ä‡ siebie.',tag:'A2'},
+ {w:'apologise',ph:'/epolydzajz/',pos:'czasownik',def:'przeprosic - wyrazic ze zrobiles cos zle',ex:'I apologise for being late.',tip:'US: "apologize" z z. "Sorry" = nieformalne.',tag:'A2'},
+ {w:'suggest',ph:'/sedzest/',pos:'czasownik',def:'zaproponowac - masz pomysl dla kogos',ex:'I <b>suggest</b> meeting on Tuesday.',tip:'"I suggest + ing": I suggest going.',tag:'A2'},
+ {w:'arrange',ph:'/ereyndz/',pos:'czasownik',def:'zorganizowac - zaplanowac cos z wyprzedzeniem',ex:'Can you <b>arrange</b> the meeting?',tip:'"Arrangement" = ustalenia, plan.',tag:'A2'},
+ {w:'cancel',ph:'/kĂ¦nsel/',pos:'czasownik',def:'odwolac - anulowac spotkanie lub plan',ex:'We had to <b>cancel</b> the meeting.',tip:'"Cancellation" = odwoĹ‚anie.',tag:'A2'},
+ {w:'remind',ph:'/rimaind/',pos:'czasownik',def:'przypomniec - powiedziec komus o czyms',ex:'Please <b>remind</b> me about the call.',tip:'"Reminder" = przypomnienie.',tag:'A2'},
+ {w:'concentrate',ph:'/konsentreit/',pos:'czasownik',def:'koncentrowac sie - skupiac uwage na czyms',ex:'It is hard to <b>concentrate</b> in traffic.',tip:'"Concentrate on" = skupiÄ‡ siÄ™ na.',tag:'A2'},
+ {w:'estimate',ph:'/estymejt/',pos:'czasownik',def:'szacowac - przyblizony czas lub koszt',ex:'I <b>estimate</b> 2 hours for this task.',tip:'"Estimate" teĹĽ rzeczownik: "give an estimate".',tag:'A2'},
+ {w:'require',ph:'/rikwajer/',pos:'czasownik',def:'wymagac - cos jest potrzebne lub obowiazkowe',ex:'This job <b>requires</b> good English.',tip:'"Requirement" = wymaganie.',tag:'A2'},
+ {w:'permit',ph:'/permyt/',pos:'czasownik',def:'pozwolic - dac zgode na cos',ex:'Smoking is not <b>permitted</b> here.',tip:'"Permission" = pozwolenie.',tag:'A2'},
+ {w:'reduce',ph:'/ridjuus/',pos:'czasownik',def:'zmniejszyc - obnizyc ilosc lub koszt',ex:'We need to <b>reduce</b> costs.',tip:'"Reduction" = redukcja, obniĹĽka.',tag:'A2'},
+ {w:'increase',ph:'/inkriis/',pos:'czasownik',def:'zwiekszac - podnosic ilosc lub wartosc',ex:'Sales <b>increased</b> by 10%.',tip:'"Increase" teĹĽ rzeczownik: "a big increase".',tag:'A2'},
+ {w:'update',ph:'/apdejt/',pos:'czasownik',def:'aktualizowac - dawac nowe informacje',ex:'Please <b>update</b> me on the project.',tip:'"What is the update?" = co nowego?',tag:'A2'},
+ {w:'approve',ph:'/epruuv/',pos:'czasownik',def:'zatwierdzic - oficjalnie zgodzic sie',ex:'The manager needs to <b>approve</b> this.',tip:'"Approval" = zatwierdzenie, aprobata.',tag:'A2'},
+ {w:'process',ph:'/proses/',pos:'rzeczownik',def:'proces - seria krokow do wykonania',ex:'What is the <b>process</b> for this?',tip:'"Process" teĹĽ czasownik: "process a request".',tag:'A2'},
+ {w:'issue',ph:'/yszuu/',pos:'rzeczownik',def:'problem lub kwestia do omowienia',ex:'We have an <b>issue</b> with the system.',tip:'Bardziej formalne niĹĽ "problem".',tag:'A2'},
+ {w:'handle',ph:'/hĂ¦ndl/',pos:'czasownik',def:'zajÄ…Ä‡ siÄ™ czyms - poradzic sobie z zadaniem',ex:'Can you <b>handle</b> this request?',tip:'"Handle" = radziÄ‡ sobie z czymĹ›.',tag:'A2'},
+ {w:'complete',ph:'/kompliit/',pos:'czasownik',def:'ukonczyc - skoĹ„czyÄ‡ zadanie w calosci',ex:'I need to <b>complete</b> this by Friday.',tip:'"Completion" = zakoĹ„czenie.',tag:'A2'},
+ {w:'launch',ph:'/looncz/',pos:'czasownik',def:'uruchomic, wprowadzic - zaczac nowy projekt',ex:'We will <b>launch</b> the product next month.',tip:'"Product launch" = premiera produktu.',tag:'A2'},
 ];
 const DQS=[
-  {q:'Co znaczy "tired"?',opts:['zmeczony','glodny','szczesliwy','zajety'],ans:0},
-  {q:'Jak powiedziec "jestem glodny"?',opts:['I am busy','I am tired','I am hungry','I am early'],ans:2},
-  {q:'Uzupelnij: "Be ___ when you drive."',opts:['hungry','careful','tired','busy'],ans:1},
-  {q:'Co znaczy "early"?',opts:['pozno','wczesnie','szybko','wolno'],ans:1},
-  {q:'Co znaczy "deadline"?',opts:['poczatek','termin','spotkanie','wiadomosc'],ans:1},
-  {q:'Jak powiedziec "kolega z pracy"?',opts:['customer','colleague','commuter','manager'],ans:1},
-  {q:'Co znaczy "delayed"?',opts:['szybki','opĂłzniony','zajety','wczesny'],ans:1},
-  {q:'Uzupelnij: "Please ___ to my email."',opts:['attach','reduce','reply','confirm'],ans:2},
-  {q:'Co znaczy "remote work"?',opts:['ciezka praca','nadgodziny','praca zdalna','praca nocna'],ans:2},
-  {q:'Co znaczy "urgent"?',opts:['wazny','pilny','trudny','dlugi'],ans:1},
-  {q:'Jak powiedziec "odwolac spotkanie"?',opts:['cancel a meeting','arrange a meeting','confirm a meeting','remind a meeting'],ans:0},
-  {q:'Co znaczy "feedback"?',opts:['wynagrodzenie','informacja zwrotna','spotkanie','raport'],ans:1},
-  {q:'Uzupelnij: "I need to ___ my English."',opts:['cancel','improve','permit','delay'],ans:1},
-  {q:'Co znaczy "available"?',opts:['pilny','dostepny','zajety','opĂłzniony'],ans:1},
-  {q:'Jak powiedziec "osiagnac cel"?',opts:['achieve a goal','reduce a goal','handle a goal','launch a goal'],ans:0},
-  {q:'Co znaczy "salary"?',opts:['klient','pensja','faktura','raport'],ans:1},
-  {q:'Co znaczy "schedule"?',opts:['harmonogram','kolega','dzial','spotkanie'],ans:0},
-  {q:'Uzupelnij: "Can you ___ the meeting?"',opts:['reduce','permit','arrange','issue'],ans:2},
-  {q:'Co znaczy "confident"?',opts:['zdenerwowany','zmeczony','pewny siebie','ostrozny'],ans:2},
-  {q:'Jak powiedziec "zmniejszyc koszty"?',opts:['increase costs','reduce costs','launch costs','handle costs'],ans:1},
-  {q:'Co znaczy "commute"?',opts:['dojeĹĽdĹĽac do pracy','robic raport','wysylac email','zarzadzac'],ans:0},
-  {q:'Co znaczy "issue"?',opts:['cel','problem','sukces','raport'],ans:1},
-  {q:'Uzupelnij: "Please ___ me about the meeting."',opts:['cancel','remind','reduce','permit'],ans:1},
-  {q:'Co znaczy "efficient"?',opts:['grzeczny','elastyczny','wydajny','sfrustrowany'],ans:2},
-  {q:'Jak powiedziec "zatwierdzic"?',opts:['suggest','approve','manage','estimate'],ans:1},
-  {q:'Co znaczy "challenge"?',opts:['przerwa','wyzwanie','klient','proces'],ans:1},
-  {q:'Uzupelnij: "We will ___ the product next month."',opts:['cancel','reduce','launch','permit'],ans:2},
-  {q:'Co znaczy "flexible"?',opts:['pilny','wydajny','elastyczny','odpowiedzialny'],ans:2},
-  {q:'Jak powiedziec "ukonczyc zadanie"?',opts:['update a task','complete a task','suggest a task','report a task'],ans:1},
-  {q:'Co znaczy "concentrate"?',opts:['osiagnac','skupiac sie','zarzÄ…dzac','wymagac'],ans:1},
+ {q:'Co znaczy "tired"?',opts:['zmeczony','glodny','szczesliwy','zajety'],ans:0},
+ {q:'Jak powiedziec "jestem glodny"?',opts:['I am busy','I am tired','I am hungry','I am early'],ans:2},
+ {q:'Uzupelnij: "Be ___ when you drive."',opts:['hungry','careful','tired','busy'],ans:1},
+ {q:'Co znaczy "early"?',opts:['pozno','wczesnie','szybko','wolno'],ans:1},
+ {q:'Co znaczy "deadline"?',opts:['poczatek','termin','spotkanie','wiadomosc'],ans:1},
+ {q:'Jak powiedziec "kolega z pracy"?',opts:['customer','colleague','commuter','manager'],ans:1},
+ {q:'Co znaczy "delayed"?',opts:['szybki','opozniony','zajety','wczesny'],ans:1},
+ {q:'Uzupelnij: "Please ___ to my email."',opts:['attach','reduce','reply','confirm'],ans:2},
+ {q:'Co znaczy "remote work"?',opts:['ciezka praca','nadgodziny','praca zdalna','praca nocna'],ans:2},
+ {q:'Co znaczy "urgent"?',opts:['wazny','pilny','trudny','dlugi'],ans:1},
+ {q:'Jak powiedziec "odwolac spotkanie"?',opts:['cancel a meeting','arrange a meeting','confirm a meeting','remind a meeting'],ans:0},
+ {q:'Co znaczy "feedback"?',opts:['wynagrodzenie','informacja zwrotna','spotkanie','raport'],ans:1},
+ {q:'Uzupelnij: "I need to ___ my English."',opts:['cancel','improve','permit','delay'],ans:1},
+ {q:'Co znaczy "available"?',opts:['pilny','dostÄ™pny','zajety','opozniony'],ans:1},
+ {q:'Jak powiedziec "osiagnac cel"?',opts:['achieve a goal','reduce a goal','handle a goal','launch a goal'],ans:0},
+ {q:'Co znaczy "salary"?',opts:['klient','pensja','faktura','raport'],ans:1},
+ {q:'Co znaczy "schedule"?',opts:['harmonogram','kolega','dzial','spotkanie'],ans:0},
+ {q:'Uzupelnij: "Can you ___ the meeting?"',opts:['reduce','permit','arrange','issue'],ans:2},
+ {q:'Co znaczy "confident"?',opts:['zdenerwowany','zmeczony','pewny siebie','ostrozny'],ans:2},
+ {q:'Jak powiedziec "zmniejszyc koszty"?',opts:['increase costs','reduce costs','launch costs','handle costs'],ans:1},
+ {q:'Co znaczy "commute"?',opts:['dojezdzac do pracy','robic raport','wysylac email','zarzadzac'],ans:0},
+ {q:'Co znaczy "issue"?',opts:['cel','problem','sukces','raport'],ans:1},
+ {q:'Uzupelnij: "Please ___ me about the meeting."',opts:['cancel','remind','reduce','permit'],ans:1},
+ {q:'Co znaczy "efficient"?',opts:['grzeczny','elastyczny','wydajny','sfrustrowany'],ans:2},
+ {q:'Jak powiedziec "zatwierdzic"?',opts:['suggest','approve','manage','estimate'],ans:1},
+ {q:'Co znaczy "challenge"?',opts:['przerwa','wyzwanie','klient','proces'],ans:1},
+ {q:'Uzupelnij: "We will ___ the product next month."',opts:['cancel','reduce','launch','permit'],ans:2},
+ {q:'Co znaczy "flexible"?',opts:['pilny','wydajny','elastyczny','odpowiedzialny'],ans:2},
+ {q:'Jak powiedziec "ukonczyc zadanie"?',opts:['update a task','complete a task','suggest a task','report a task'],ans:1},
+ {q:'Co znaczy "concentrate"?',opts:['osiagnac','skupiac sie','zarzadzac','wymagac'],ans:1},
 ];
 const WEEK=[
-  {id:'morning',name:'Pon',sub:'rano 15min',bg:'rgba(255,179,71,.12)',fg:'var(--warn)',pane:'morning'},
-  {id:'drive',name:'Wt-Czw',sub:'jazda 2x20',bg:'rgba(56,224,164,.1)',fg:'var(--accent2)',pane:'drive'},
-  {id:'evening',name:'Wiecz',sub:'SRS',bg:'rgba(79,124,255,.12)',fg:'var(--accent)',pane:'evening'},
-  {id:'friday',name:'Pt',sub:'skupienie',bg:'rgba(79,124,255,.12)',fg:'var(--accent)',pane:'friday'},
-  {id:'saturday',name:'Sob',sub:'20 min',bg:'rgba(56,224,164,.1)',fg:'var(--accent2)',pane:'weekend'},
-  {id:'sunday',name:'Nd',sub:'20 min',bg:'rgba(56,224,164,.1)',fg:'var(--accent2)',pane:'weekend'},
-  {id:'bonus',name:'Bonus',sub:'zawsze',bg:'rgba(212,83,126,.12)',fg:'#e06090',pane:'bonus'},
+ {id:'morning',name:'Pon',sub:'rano 15min',bg:'rgba(255,179,71,.12)',fg:'var(--warn)',pane:'morning'},
+ {id:'drive',name:'Wt-Czw',sub:'jazda 2x20',bg:'rgba(56,224,164,.1)',fg:'var(--accent2)',pane:'drive'},
+ {id:'evening',name:'Wiecz',sub:'SRS',bg:'rgba(79,124,255,.12)',fg:'var(--accent)',pane:'evening'},
+ {id:'friday',name:'Pt',sub:'skupienie',bg:'rgba(79,124,255,.12)',fg:'var(--accent)',pane:'friday'},
+ {id:'saturday',name:'Sob',sub:'20 min',bg:'rgba(56,224,164,.1)',fg:'var(--accent2)',pane:'weekend'},
+ {id:'sunday',name:'Nd',sub:'20 min',bg:'rgba(56,224,164,.1)',fg:'var(--accent2)',pane:'weekend'},
+ {id:'bonus',name:'Bonus',sub:'zawsze',bg:'rgba(212,83,126,.12)',fg:'#e06090',pane:'bonus'},
 ];
 const SVGS={morning:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79zm10.45-1.79l-1.8 1.79 1.41 1.41 1.8-1.79zM13 1h-2v3h2zM4 11H1v2h3zm16 0v2h3v-2zm-8 1c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95V22h2v-3.05c2.5-.5 4.5-2.5 4.5-5.95h-2c0 2.21-1.79 4-4 4s-4-1.79-4-4H5c0 3.45 2 5.45 4.5 5.95z"/></svg>`,drive:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>`,evening:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>`,friday:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>`,saturday:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>`,sunday:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>`,bonus:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>`};
 
@@ -592,392 +592,413 @@ const DEF={xp:0,streak:0,totalWords:0,mIdx:0,dIdx:0,dCorrect:0,dWrong:0,evIdx:0,
 let S={...DEF},timer=null,timerSec=0,driving=false,wkTimer=null,wkSec=0,wkRunning=false,focusMode='grammar',bonusMode='extra';
 
 async function loadSupa(){
-  if(!currentUser)return;
-  const{data:p}=await sb.from('profiles').select('*').eq('id',currentUser.id).single();
-  if(p){
-    S.xp=p.xp||0;S.streak=p.streak||0;
-    const today=new Date().toISOString().split('T')[0];
-    const yesterday=new Date(Date.now()-86400000).toISOString().split('T')[0];
-    if(p.last_active===today){/* streak ok */}
-    else if(p.last_active===yesterday){S.streak++;/* kontynuuj streak */}
-    else if(p.last_active&&p.last_active<yesterday){S.streak=1;/* reset */}
-  }
-  const{data:words}=await sb.from('word_progress').select('*').eq('user_id',currentUser.id);
-  if(words){words.forEach(w=>{S.ease[w.word]=w.ease||0;});S.totalWords=words.length;}
-  const today=new Date().toISOString().split('T')[0];
-  const{data:stats}=await sb.from('daily_stats').select('*').eq('user_id',currentUser.id).eq('date',today).single();
-  if(stats)S.sxp=stats.total_xp||0;
+ if(!currentUser)return;
+ const{data:p}=await sb.from('profiles').select('*').eq('id',currentUser.id).single();
+ if(p){
+ S.xp=p.xp||0;S.streak=p.streak||0;
+ const today=new Date().toISOString().split('T')[0];
+ const yesterday=new Date(Date.now()-86400000).toISOString().split('T')[0];
+ if(p.last_active===today){/* streak ok */}
+ else if(p.last_active===yesterday){S.streak++;/* kontynuuj streak */}
+ else if(p.last_active&&p.last_active<yesterday){S.streak=1;/* reset */}
+ }
+ const{data:words}=await sb.from('word_progress').select('*').eq('user_id',currentUser.id);
+ if(words){words.forEach(w=>{S.ease[w.word]=w.ease||0;});S.totalWords=words.length;}
+ const today=new Date().toISOString().split('T')[0];
+ const{data:stats}=await sb.from('daily_stats').select('*').eq('user_id',currentUser.id).eq('date',today).single();
+ if(stats)S.sxp=stats.total_xp||0;
 }
 
 async function saveSupa(){
-  if(!currentUser)return;
-  const today=new Date().toISOString().split('T')[0];
-  await sb.from('profiles').upsert({id:currentUser.id,xp:S.xp,streak:S.streak,last_active:today});
-  const rows=Object.entries(S.ease).map(([word,ease])=>({user_id:currentUser.id,word,ease,times_seen:1,last_seen:new Date().toISOString(),next_review:new Date().toISOString()}));
-  if(rows.length>0)await sb.from('word_progress').upsert(rows,{onConflict:'user_id,word'});
-  await sb.from('daily_stats').upsert({user_id:currentUser.id,date:today,total_xp:S.sxp,total_correct:S.dCorrect,total_wrong:S.dWrong,words_reviewed:S.totalWords},{onConflict:'user_id,date'});
-  const t=document.getElementById('save-toast');t.classList.remove('show');void t.offsetWidth;t.classList.add('show');
+ if(!currentUser)return;
+ const today=new Date().toISOString().split('T')[0];
+ await sb.from('profiles').upsert({id:currentUser.id,xp:S.xp,streak:S.streak,last_active:today});
+ const rows=Object.entries(S.ease).map(([word,ease])=>({user_id:currentUser.id,word,ease,times_seen:1,last_seen:new Date().toISOString(),next_review:new Date().toISOString()}));
+ if(rows.length>0)await sb.from('word_progress').upsert(rows,{onConflict:'user_id,word'});
+ await sb.from('daily_stats').upsert({user_id:currentUser.id,date:today,total_xp:S.sxp,total_correct:S.dCorrect,total_wrong:S.dWrong,words_reviewed:S.totalWords},{onConflict:'user_id,date'});
+ const t=document.getElementById('save-toast');t.classList.remove('show');void t.offsetWidth;t.classList.add('show');
 }
 
 async function initApp(){
-  document.getElementById('auth-screen').style.display='none';
-  document.getElementById('app-screen').style.display='block';
-  await loadSupa();
-  renderMorning();renderDrive();renderEvening();renderWeekend();renderWordProgress();updateXP();
+ document.getElementById('auth-screen').style.display='none';
+ document.getElementById('app-screen').style.display='block';
+ await loadSupa();
+ renderMorning();renderDrive();renderEvening();renderWeekend();renderWordProgress();updateXP();
 }
 
 sb.auth.onAuthStateChange(async(event,session)=>{
-  if(session?.user&&!currentUser){currentUser=session.user;document.getElementById('user-email').textContent=currentUser.email;await initApp();}
+ if(session?.user&&!currentUser){currentUser=session.user;document.getElementById('user-email').textContent=currentUser.email;await initApp();}
 });
 
 function goNav(pane){
-  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
-  document.getElementById('pane-'+pane).classList.add('active');
-  document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('act'));
-  const btn=document.getElementById('bn-'+pane);
-  if(btn)btn.classList.add('act');
-  document.getElementById('session-end').classList.remove('show');
-  hideFeedback();
-  if(pane==='evening'){renderEvening();renderWordProgress();}
-  if(pane==='weekend')renderWeekend();
-  window.scrollTo(0,0);
+ document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+ document.getElementById('pane-'+pane).classList.add('active');
+ document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('act'));
+ const btn=document.getElementById('bn-'+pane);
+ if(btn)btn.classList.add('act');
+ document.getElementById('session-end').classList.remove('show');
+ hideFeedback();
+ if(pane==='evening'){renderEvening();renderWordProgress();}
+ if(pane==='weekend')renderWeekend();
+ window.scrollTo(0,0);
 }
 
 function renderMorning(){
-  const SESSION=5;
-  const pos=S.mIdx%SESSION;
-  const sessStart=S.mIdx-pos;
-  const isNewSess=(pos===0&&S.mIdx>0&&S.mIdx===sessStart);
-  const card=document.getElementById('m-card');
-  const done=document.getElementById('m-done');
-  const ai=document.getElementById('m-ai');
-  if(S.mIdx>0&&pos===0){
-    if(card)card.style.display='none';
-    if(ai)ai.style.display='none';
-    if(done){done.classList.add('show');document.getElementById('m-done-xp').textContent='+'+(S.mSessionXP||0)+' XP zdobyte!';}
-    return;
-  }
-  if(card)card.style.display='block';
-  if(ai)ai.style.display='block';
-  if(done)done.classList.remove('show');
-  const i=S.mIdx%WORDS.length,w=WORDS[i];
-  ['m-word','m-ph','m-pos','m-def','m-tip','m-tag'].forEach(id=>{const map={'m-word':w.w,'m-ph':w.ph,'m-pos':w.pos,'m-def':w.def,'m-tip':w.tip,'m-tag':w.tag};document.getElementById(id).textContent=map[id];});
-  document.getElementById('m-ex').innerHTML=w.ex;
-  document.getElementById('m-num').textContent='slĂłwko '+(pos+1)+' z '+SESSION;
-  document.getElementById('m-fill').style.width=Math.round(((pos+1)/SESSION)*100)+'%';
-  document.getElementById('m-lbl').textContent=(pos+1)+'/'+SESSION;
+ const SESSION=5;
+ const pos=S.mIdx%SESSION;
+ const sessStart=S.mIdx-pos;
+ const isNewSess=(pos===0&&S.mIdx>0&&S.mIdx===sessStart);
+ const card=document.getElementById('m-card');
+ const done=document.getElementById('m-done');
+ const ai=document.getElementById('m-ai');
+ if(S.mIdx>0&&pos===0){
+ if(card)card.style.display='none';
+ if(ai)ai.style.display='none';
+ if(done){done.classList.add('show');document.getElementById('m-done-xp').textContent='+'+(S.mSessionXP||0)+' XP zdobyte!';}
+ return;
+ }
+ if(card)card.style.display='block';
+ if(ai)ai.style.display='block';
+ if(done)done.classList.remove('show');
+ const i=S.mIdx%WORDS.length,w=WORDS[i];
+ ['m-word','m-ph','m-pos','m-def','m-tip','m-tag'].forEach(id=>{const map={'m-word':w.w,'m-ph':w.ph,'m-pos':w.pos,'m-def':w.def,'m-tip':w.tip,'m-tag':w.tag};document.getElementById(id).textContent=map[id];});
+ document.getElementById('m-ex').innerHTML=w.ex;
+ document.getElementById('m-num').textContent='slowko '+(pos+1)+' z '+SESSION;
+ document.getElementById('m-fill').style.width=Math.round(((pos+1)/SESSION)*100)+'%';
+ document.getElementById('m-lbl').textContent=(pos+1)+'/'+SESSION;
 }
 
 function renderDrive(){
-  const q=DQS[S.dIdx%DQS.length];
-  document.getElementById('d-badge').textContent='BLOK '+(S.dIdx<DQS.length?1:2)+' Â· PYT '+(S.dIdx%DQS.length+1);
-  document.getElementById('d-score').textContent=S.dCorrect+'/'+(S.dCorrect+S.dWrong);
-  document.getElementById('d-q').textContent=q.q;
-  const L=['A','B','C','D'];
-  document.querySelectorAll('.dopt').forEach((o,i)=>{o.textContent=L[i]+'. '+q.opts[i];o.className='dopt';const c=i===q.ans;o.onclick=function(){dAns(this,c);};});
-  document.getElementById('d-next').classList.remove('show');
+ const q=DQS[S.dIdx%DQS.length];
+ document.getElementById('d-badge').textContent='BLOK '+(S.dIdx<DQS.length?1:2)+' Â· PYT '+(S.dIdx%DQS.length+1);
+ document.getElementById('d-score').textContent=S.dCorrect+'/'+(S.dCorrect+S.dWrong);
+ document.getElementById('d-q').textContent=q.q;
+ const L=['A','B','C','D'];
+ document.querySelectorAll('.dopt').forEach((o,i)=>{o.textContent=L[i]+'. '+q.opts[i];o.className='dopt';const c=i===q.ans;o.onclick=function(){dAns(this,c);};});
+ document.getElementById('d-next').classList.remove('show');
 }
 
 function dAns(el,ok){
-  const q=DQS[S.dIdx%DQS.length];
-  document.querySelectorAll('.dopt').forEach((o,i)=>{o.style.pointerEvents='none';if(i===q.ans)o.classList.add('ok');});
-  if(!ok){el.classList.add('no');S.dWrong++;}else{S.dCorrect++;S.xp+=8;S.sxp+=8;}
-  document.getElementById('d-score').textContent=S.dCorrect+'/'+(S.dCorrect+S.dWrong);
-  document.getElementById('d-next').classList.add('show');
-  updateXP();saveSupa();
+ const q=DQS[S.dIdx%DQS.length];
+ document.querySelectorAll('.dopt').forEach((o,i)=>{o.style.pointerEvents='none';if(i===q.ans)o.classList.add('ok');});
+ if(!ok){el.classList.add('no');S.dWrong++;}else{S.dCorrect++;S.xp+=8;S.sxp+=8;}
+ document.getElementById('d-score').textContent=S.dCorrect+'/'+(S.dCorrect+S.dWrong);
+ document.getElementById('d-next').classList.add('show');
+ updateXP();saveSupa();
 }
 function dNext(){S.dIdx++;renderDrive();}
 
 function toggleTimer(){
-  if(driving){clearInterval(timer);driving=false;document.getElementById('start-btn').textContent='Start jazdy';document.getElementById('start-btn').classList.remove('stop');document.getElementById('t-val').textContent='Zatrzymano';}
-  else{
-    driving=true;timerSec=20*60;document.getElementById('start-btn').textContent='Stop';document.getElementById('start-btn').classList.add('stop');
-    timer=setInterval(()=>{
-      timerSec--;const m=Math.floor(timerSec/60),s=timerSec%60;
-      document.getElementById('t-val').textContent=m+':'+(s<10?'0':'')+s;
-      document.getElementById('t-fill').style.width=Math.round((timerSec/(20*60))*100)+'%';
-      if(timerSec<=0){clearInterval(timer);driving=false;document.getElementById('start-btn').textContent='Start jazdy';document.getElementById('start-btn').classList.remove('stop');document.getElementById('t-val').textContent='Blok gotowy!';document.getElementById('t-fill').style.width='0%';}
-    },1000);
-  }
+ if(driving){clearInterval(timer);driving=false;document.getElementById('start-btn').textContent='Start jazdy';document.getElementById('start-btn').classList.remove('stop');document.getElementById('t-val').textContent='Zatrzymano';}
+ else{
+ driving=true;timerSec=20*60;document.getElementById('start-btn').textContent='Stop';document.getElementById('start-btn').classList.add('stop');
+ timer=setInterval(()=>{
+ timerSec--;const m=Math.floor(timerSec/60),s=timerSec%60;
+ document.getElementById('t-val').textContent=m+':'+(s<10?'0':'')+s;
+ document.getElementById('t-fill').style.width=Math.round((timerSec/(20*60))*100)+'%';
+ if(timerSec<=0){clearInterval(timer);driving=false;document.getElementById('start-btn').textContent='Start jazdy';document.getElementById('start-btn').classList.remove('stop');document.getElementById('t-val').textContent='Blok gotowy!';document.getElementById('t-fill').style.width='0%';}
+ },1000);
+ }
 }
 
 function renderEvening(){
-  const list=document.getElementById('ev-list');list.innerHTML='';
-  WORDS.forEach(w=>{const e=S.ease[w.w]||0;const d=document.createElement('div');d.className='wi';d.innerHTML=`<div class="wi-w">${w.w}</div><div class="wi-t">${w.def.split('â€”')[0].trim()}</div><div class="wi-bar"><div class="wi-bf" style="width:${e}%"></div></div><div class="wi-n">${e===0?'nowe':e<50?'dzis':'ok'}</div>`;list.appendChild(d);});
-  const w=WORDS[S.evIdx%WORDS.length];
-  document.getElementById('ev-word').textContent=w.w;document.getElementById('ev-def').textContent=w.def.split('â€”')[0].trim();document.getElementById('ev-ex').innerHTML=w.ex;
-  document.getElementById('ev-num').textContent=(S.evIdx%WORDS.length+1)+' z 5';
-  document.getElementById('ev-w').textContent=S.totalWords;document.getElementById('ev-s').textContent=S.streak;
-  document.getElementById('ev-a').textContent=S.dCorrect+S.dWrong>0?Math.round(S.dCorrect/(S.dCorrect+S.dWrong)*100)+'%':'â€”';
-  document.getElementById('ev-x').textContent=S.sxp;
+ const list=document.getElementById('ev-list');list.innerHTML='';
+ WORDS.forEach(w=>{const e=S.ease[w.w]||0;const d=document.createElement('div');d.className='wi';d.innerHTML=`<div class="wi-w">${w.w}</div><div class="wi-t">${w.def.split(' -- ')[0].trim()}</div><div class="wi-bar"><div class="wi-bf" style="width:${e}%"></div></div><div class="wi-n">${e===0?'nowe':e<50?'dziĹ›':'ok'}</div>`;list.appendChild(d);});
+ const w=WORDS[S.evIdx%WORDS.length];
+ document.getElementById('ev-word').textContent=w.w;document.getElementById('ev-def').textContent=w.def.split(' -- ')[0].trim();document.getElementById('ev-ex').innerHTML=w.ex;
+ document.getElementById('ev-num').textContent=(S.evIdx%WORDS.length+1)+' z 5';
+ document.getElementById('ev-w').textContent=S.totalWords;document.getElementById('ev-s').textContent=S.streak;
+ document.getElementById('ev-a').textContent=S.dCorrect+S.dWrong>0?Math.round(S.dCorrect/(S.dCorrect+S.dWrong)*100)+'%':' -- ';
+ document.getElementById('ev-x').textContent=S.sxp;
 }
 
 function renderWeekend(){
-  const list=document.getElementById('wk-list');list.innerHTML='';
-  const sorted=[...WORDS].sort((a,b)=>(S.ease[a.w]||0)-(S.ease[b.w]||0));
-  sorted.forEach(w=>{const e=S.ease[w.w]||0;const d=document.createElement('div');d.className='wi';d.innerHTML=`<div class="wi-w">${w.w}</div><div class="wi-t">${w.def.split('â€”')[0].trim()}</div><div class="wi-bar"><div class="wi-bf" style="width:${e}%"></div></div><div class="wi-n">${e<30?'trudne':e<70?'srednie':'latwe'}</div>`;list.appendChild(d);});
-  const w=sorted[S.wkIdx%sorted.length];
-  document.getElementById('wk-word').textContent=w.w;document.getElementById('wk-def').textContent=w.def;document.getElementById('wk-ex').innerHTML=w.ex;
-  document.getElementById('wk-num').textContent=(S.wkIdx%sorted.length+1)+' z '+sorted.length;
+ const list=document.getElementById('wk-list');list.innerHTML='';
+ const sorted=[...WORDS].sort((a,b)=>(S.ease[a.w]||0)-(S.ease[b.w]||0));
+ sorted.forEach(w=>{const e=S.ease[w.w]||0;const d=document.createElement('div');d.className='wi';d.innerHTML=`<div class="wi-w">${w.w}</div><div class="wi-t">${w.def.split(' -- ')[0].trim()}</div><div class="wi-bar"><div class="wi-bf" style="width:${e}%"></div></div><div class="wi-n">${e<30?'trudne':e<70?'Ĺ›rednie':'Ĺ‚atwe'}</div>`;list.appendChild(d);});
+ const w=sorted[S.wkIdx%sorted.length];
+ document.getElementById('wk-word').textContent=w.w;document.getElementById('wk-def').textContent=w.def;document.getElementById('wk-ex').innerHTML=w.ex;
+ document.getElementById('wk-num').textContent=(S.wkIdx%sorted.length+1)+' z '+sorted.length;
 }
 
 function toggleWkTimer(){
-  if(wkRunning){clearInterval(wkTimer);wkRunning=false;document.getElementById('wk-start').textContent='Start';document.getElementById('wk-start').classList.remove('stop');}
-  else{
-    wkRunning=true;wkSec=20*60;document.getElementById('wk-start').textContent='Stop';document.getElementById('wk-start').classList.add('stop');
-    wkTimer=setInterval(()=>{
-      wkSec--;const m=Math.floor(wkSec/60),s=wkSec%60;
-      document.getElementById('wk-tval').textContent=m+':'+(s<10?'0':'')+s;
-      document.getElementById('wk-tbar').style.width=Math.round((wkSec/(20*60))*100)+'%';
-      document.getElementById('wk-lbl').textContent='pozostalo';
-      if(wkSec<=0){clearInterval(wkTimer);wkRunning=false;document.getElementById('wk-start').textContent='Koniec';document.getElementById('wk-start').disabled=true;document.getElementById('wk-start').classList.remove('stop');document.getElementById('wk-tval').textContent='Gotowe!';document.getElementById('wk-lbl').textContent='na dzis wystarczy';}
-    },1000);
-  }
+ if(wkRunning){clearInterval(wkTimer);wkRunning=false;document.getElementById('wk-start').textContent='Start';document.getElementById('wk-start').classList.remove('stop');}
+ else{
+ wkRunning=true;wkSec=20*60;document.getElementById('wk-start').textContent='Stop';document.getElementById('wk-start').classList.add('stop');
+ wkTimer=setInterval(()=>{
+ wkSec--;const m=Math.floor(wkSec/60),s=wkSec%60;
+ document.getElementById('wk-tval').textContent=m+':'+(s<10?'0':'')+s;
+ document.getElementById('wk-tbar').style.width=Math.round((wkSec/(20*60))*100)+'%';
+ document.getElementById('wk-lbl').textContent='pozostalo';
+ if(wkSec<=0){clearInterval(wkTimer);wkRunning=false;document.getElementById('wk-start').textContent='Koniec';document.getElementById('wk-start').disabled=true;document.getElementById('wk-start').classList.remove('stop');document.getElementById('wk-tval').textContent='Gotowe!';document.getElementById('wk-lbl').textContent='na dziĹ› wystarczy';}
+ },1000);
+ }
 }
 
 function rate(mode,r){
-  const pts=[0,5,10,15][r];S.xp+=pts;S.sxp+=pts;
-  sessionXP+=pts;sessionTotal++;
-  if(r>=2)sessionCorrect++;
-  const ok=r>=2;
-  const tips={0:'WrĂłcimy do tego slĂłwka za chwile.',1:'Prawie! PowtĂłrz jutro.',2:'Dobrze! Zapamietales.',3:'Swietnie! Latwe dla Ciebie.'};
-  if(mode==='m'){
-    const w=WORDS[S.mIdx%WORDS.length];
-    S.ease[w.w]=Math.min(100,(S.ease[w.w]||0)+[0,20,40,70][r]);
-    S.mIdx++;S.totalWords=Object.keys(S.ease).length;
-    flashCard('m',ok);
-    showFeedback(ok,(ok?'âś“ ':'âś— ')+tips[r],()=>{
-      if(S.mIdx>0&&S.mIdx%WORDS.length===0){showSessionEnd('morning');}
-      else{renderMorning();}
-    });
-  }else if(mode==='ev'){
-    const w=WORDS[S.evIdx%WORDS.length];
-    S.ease[w.w]=Math.min(100,(S.ease[w.w]||0)+[0,15,30,50][r]);
-    S.evIdx++;
-    showFeedback(ok,(ok?'âś“ ':'âś— ')+tips[r],()=>{
-      if(S.evIdx>0&&S.evIdx%WORDS.length===0){showSessionEnd('evening');}
-      else{renderEvening();renderWordProgress();}
-    });
-  }else if(mode==='wk'){
-    S.wkIdx++;
-    showFeedback(ok,(ok?'âś“ ':'âś— ')+tips[r],()=>renderWeekend());
-  }else if(mode==='fri'){
-    showFeedback(ok,(ok?'âś“ ':'âś— ')+tips[r]);
-  }
-  updateXP();saveSupa();
+ const pts=[0,5,10,15][r];S.xp+=pts;S.sxp+=pts;
+ sessionXP+=pts;sessionTotal++;
+ if(r>=2)sessionCorrect++;
+ const ok=r>=2;
+ const tips={0:'Wrocimy do tego slowka za chwile.',1:'Prawie! Powtorz jutro.',2:'Dobrze! ZapamiÄ™taĹ‚eĹ›.',3:'Ĺšwietnie! Ĺatwe dla Ciebie.'};
+ if(mode==='m'){
+ const w=WORDS[S.mIdx%WORDS.length];
+ S.ease[w.w]=Math.min(100,(S.ease[w.w]||0)+[0,20,40,70][r]);
+ S.mIdx++;S.totalWords=Object.keys(S.ease).length;
+ flashCard('m',ok);
+ showFeedback(ok,(ok?'âś“ ':'âś— ')+tips[r],()=>{
+ if(S.mIdx>0&&S.mIdx%WORDS.length===0){showSessionEnd('morning');}
+ else{renderMorning();}
+ });
+ }else if(mode==='ev'){
+ const w=WORDS[S.evIdx%WORDS.length];
+ S.ease[w.w]=Math.min(100,(S.ease[w.w]||0)+[0,15,30,50][r]);
+ S.evIdx++;
+ showFeedback(ok,(ok?'âś“ ':'âś— ')+tips[r],()=>{
+ if(S.evIdx>0&&S.evIdx%WORDS.length===0){showSessionEnd('evening');}
+ else{renderEvening();renderWordProgress();}
+ });
+ }else if(mode==='wk'){
+ S.wkIdx++;
+ showFeedback(ok,(ok?'âś“ ':'âś— ')+tips[r],()=>renderWeekend());
+ }else if(mode==='fri'){
+ showFeedback(ok,(ok?'âś“ ':'âś— ')+tips[r]);
+ }
+ updateXP();saveSupa();
 }
 
 function updateXP(){
-  document.getElementById('xp-disp').textContent=S.xp;
-  document.getElementById('streak-disp').textContent=S.streak;
-  const lvlXP=S.xp%100;
-  document.getElementById('xp-bar-fill').style.width=lvlXP+'%';
-  document.getElementById('xp-bar-lbl').textContent=lvlXP+' / 100 XP';
+ document.getElementById('xp-disp').textContent=S.xp;
+ document.getElementById('streak-disp').textContent=S.streak;
+ const lvlXP=S.xp%100;
+ document.getElementById('xp-bar-fill').style.width=lvlXP+'%';
+ document.getElementById('xp-bar-lbl').textContent=lvlXP+' / 100 XP';
 }
-function pickFocus(el,mode){focusMode=mode;document.querySelectorAll('.fcard').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');const L={grammar:'Piatek Â· Gramatyka',speaking:'Piatek Â· MĂłwienie',reading:'Piatek Â· Czytanie',writing:'Piatek Â· Pisanie'};document.getElementById('fri-tag').textContent=L[mode];}
-function pickBonus(el,mode){bonusMode=mode;document.querySelectorAll('.bcard').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');const L={extra:'Extra slĂłwka â€” AI generuje',phrases:'Zwroty dnia â€” AI generuje',listen:'Mini dialog â€” AI generuje',challenge:'Wyzwanie â€” AI zagrywa trudniej'};document.getElementById('bonus-lbl').textContent=L[mode];}
+function pickFocus(el,mode){focusMode=mode;document.querySelectorAll('.fcard').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');const L={grammar:'Piatek Â· Gramatyka',speaking:'Piatek Â· Mowienie',reading:'Piatek Â· Czytanie',writing:'Piatek Â· Pisanie'};document.getElementById('fri-tag').textContent=L[mode];}
+function pickBonus(el,mode){bonusMode=mode;document.querySelectorAll('.bcard').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');const L={extra:'Extra slowka - AI generuje',phrases:'Zwroty dnia - AI generuje',listen:'Mini dialog - AI generuje',challenge:'Wyzwanie - AI zagrywa trudniej'};document.getElementById('bonus-lbl').textContent=L[mode];}
 
-// â”€â”€ GĹOS â”€â”€
+// â”€â”€ GLOS â”€â”€
 function speakWord(elId){
-  if(!('speechSynthesis' in window))return;
-  const word=document.getElementById(elId)?.textContent?.trim();
-  if(!word)return;
-  const btn=event?.target?.closest('.speak-btn');
-  if(btn){btn.classList.add('speaking');setTimeout(()=>btn.classList.remove('speaking'),1200);}
-  const u=new SpeechSynthesisUtterance(word);
-  u.lang='en-GB';u.rate=0.82;u.pitch=1;
-  speechSynthesis.cancel();speechSynthesis.speak(u);
+ if(!('speechSynthesis' in window))return;
+ const word=document.getElementById(elId)?.textContent?.trim();
+ if(!word)return;
+ const btn=event?.target?.closest('.speak-btn');
+ if(btn){btn.classList.add('speaking');setTimeout(()=>btn.classList.remove('speaking'),1200);}
+ const u=new SpeechSynthesisUtterance(word);
+ u.lang='en-GB';u.rate=0.82;u.pitch=1;
+ speechSynthesis.cancel();speechSynthesis.speak(u);
 }
 
 // â”€â”€ ANIMACJE ODPOWIEDZI â”€â”€
 function flashCard(mode,ok){
-  const cardMap={m:'m-card',ev:null,wk:null};
-  const card=cardMap[mode]?document.getElementById(cardMap[mode]):null;
-  if(card){card.classList.remove('anim-ok','anim-err');void card.offsetWidth;card.classList.add(ok?'anim-ok':'anim-err');setTimeout(()=>card.classList.remove('anim-ok','anim-err'),600);}
+ const cardMap={m:'m-card',ev:null,wk:null};
+ const card=cardMap[mode]?document.getElementById(cardMap[mode]):null;
+ if(card){card.classList.remove('anim-ok','anim-err');void card.offsetWidth;card.classList.add(ok?'anim-ok':'anim-err');setTimeout(()=>card.classList.remove('anim-ok','anim-err'),600);}
 }
 
 // â”€â”€ FEEDBACK BAR â”€â”€
 let fbTimeout=null;
 function showFeedback(ok,msg,onNext){
-  const bar=document.getElementById('fb-bar');
-  const inner=document.getElementById('fb-inner');
-  inner.className='fb-inner '+(ok?'ok':'err');
-  document.getElementById('fb-text').textContent=msg;
-  const btn=document.getElementById('fb-next');
-  btn.onclick=()=>{hideFeedback();if(onNext)onNext();};
-  bar.classList.add('show');
-  if(fbTimeout)clearTimeout(fbTimeout);
-  if(ok)fbTimeout=setTimeout(()=>{hideFeedback();if(onNext)onNext();},1800);
+ const bar=document.getElementById('fb-bar');
+ const inner=document.getElementById('fb-inner');
+ inner.className='fb-inner '+(ok?'ok':'err');
+ document.getElementById('fb-text').textContent=msg;
+ const btn=document.getElementById('fb-next');
+ btn.onclick=()=>{hideFeedback();if(onNext)onNext();};
+ bar.classList.add('show');
+ if(fbTimeout)clearTimeout(fbTimeout);
+ if(ok)fbTimeout=setTimeout(()=>{hideFeedback();if(onNext)onNext();},1800);
 }
 function hideFeedback(){
-  document.getElementById('fb-bar').classList.remove('show');
-  if(fbTimeout){clearTimeout(fbTimeout);fbTimeout=null;}
+ document.getElementById('fb-bar').classList.remove('show');
+ if(fbTimeout){clearTimeout(fbTimeout);fbTimeout=null;}
 }
 
-// â”€â”€ STATYSTYKI POSTÄPU â”€â”€
+// â”€â”€ STATYSTYKI POSTEPU â”€â”€
 function renderWordProgress(){
-  const list=document.getElementById('prog-list');
-  if(!list)return;
-  list.innerHTML='';
-  const sorted=[...WORDS].sort((a,b)=>(S.ease[b.w]||0)-(S.ease[a.w]||0)).slice(0,15);
-  sorted.forEach(w=>{
-    const e=S.ease[w.w]||0;
-    const color=e<30?'var(--danger)':e<60?'var(--warn)':'var(--accent2)';
-    const d=document.createElement('div');d.className='prog-item';
-    d.innerHTML=`<div class="prog-word">${w.w}</div><div class="prog-bar"><div class="prog-fill" style="width:${e}%;background:${color}"></div></div><div class="prog-pct">${e}%</div>`;
-    list.appendChild(d);
-  });
+ const list=document.getElementById('prog-list');
+ if(!list)return;
+ list.innerHTML='';
+ const sorted=[...WORDS].sort((a,b)=>(S.ease[b.w]||0)-(S.ease[a.w]||0)).slice(0,15);
+ sorted.forEach(w=>{
+ const e=S.ease[w.w]||0;
+ const color=e<30?'var(--danger)':e<60?'var(--warn)':'var(--accent2)';
+ const d=document.createElement('div');d.className='prog-item';
+ d.innerHTML=`<div class="prog-word">${w.w}</div><div class="prog-bar"><div class="prog-fill" style="width:${e}%;background:${color}"></div></div><div class="prog-pct">${e}%</div>`;
+ list.appendChild(d);
+ });
 }
 
-// â”€â”€ EKRAN KOĹCA SESJI â”€â”€
+// â”€â”€ EKRAN KONCA SESJI â”€â”€
 let sessionCorrect=0,sessionTotal=0,sessionXP=0;
 function resetSession(){sessionCorrect=0;sessionTotal=0;sessionXP=0;}
 
 function showSessionEnd(pane){
-  const stars=sessionTotal>0?Math.round(sessionCorrect/sessionTotal*3):3;
-  const starStr='â­'.repeat(Math.max(1,stars))+'â†'.repeat(Math.max(0,3-stars));
-  document.getElementById('se-xp').textContent=sessionXP;
-  document.getElementById('se-words').textContent=Object.keys(S.ease).length;
-  document.getElementById('se-streak').textContent=S.streak;
-  document.getElementById('se-stars').textContent=starStr;
-  document.getElementById('se-sub').textContent=stars>=3?'Perfekcyjnie! Wszystkie slĂłwka opanowane.':stars>=2?'Bardzo dobrze! PowtĂłrz slabsze slĂłwka wieczorem.':'Nie przejmuj sie â€” powarzanie to klucz!';
-  document.getElementById('se-continue').dataset.pane=pane;
-  const end=document.getElementById('session-end');
-  end.classList.add('show');
-  end.scrollIntoView({behavior:'smooth'});
-  resetSession();
+ const stars=sessionTotal>0?Math.round(sessionCorrect/sessionTotal*3):3;
+ const starStr='â­'.repeat(Math.max(1,stars))+'â†'.repeat(Math.max(0,3-stars));
+ document.getElementById('se-xp').textContent=sessionXP;
+ document.getElementById('se-words').textContent=Object.keys(S.ease).length;
+ document.getElementById('se-streak').textContent=S.streak;
+ document.getElementById('se-stars').textContent=starStr;
+ document.getElementById('se-sub').textContent=stars>=3?'Perfekcyjnie! Wszystkie slowka opanowane.':stars>=2?'Bardzo dobrze! Powtorz slabsze slowka wieczorem.':'Nie przejmuj siÄ™ - powarzanie to klucz!';
+ document.getElementById('se-continue').dataset.pane=pane;
+ const end=document.getElementById('session-end');
+ end.classList.add('show');
+ end.scrollIntoView({behavior:'smooth'});
+ resetSession();
 }
 
 async function continueSession(){
-  const btn=document.getElementById('se-continue');
-  btn.textContent='Generuje nowe slĂłwka...';btn.disabled=true;
-  const known=Object.keys(S.ease).join(', ')||'brak';
-  try{
-    const text=await callAI(
-      'Jestes nauczycielem angielskiego A2. Odpowiadaj TYLKO jako tablica JSON bez zadnego innego tekstu.',
-      `Wygeneruj 5 nowych slow angielskich A2. Uzytkownik zna juz: ${known}. Format: [{"w":"word","ph":"/wymowa/","pos":"czesc mowy","def":"tlumaczenie â€” opis","ex":"Przykladowe <b>word</b> zdanie.","tip":"WskazĂłwka","tag":"A2"}]`
-    );
-    const clean=text.replace(/```json|```/g,'').trim();
-    const newWords=JSON.parse(clean);
-    if(Array.isArray(newWords)&&newWords.length>0){
-      newWords.forEach(w=>{if(!WORDS.find(x=>x.w===w.w))WORDS.push(w);});
-      document.getElementById('session-end').classList.remove('show');
-      const pane=btn.dataset.pane||'morning';
-      if(pane==='morning')renderMorning();
-      else if(pane==='evening'){renderEvening();renderWordProgress();}
-    }
-  }catch(e){btn.textContent='Blad â€” sprĂłbuj pozniej';}
-  btn.disabled=false;
+ const btn=document.getElementById('se-continue');
+ btn.textContent='GenerujÄ™ nowe slowka...';btn.disabled=true;
+ const known=Object.keys(S.ease).join(', ')||'brak';
+ try{
+ const text=await callAI(
+ 'Jestes nauczycielem angielskiego A2. Odpowiadaj TYLKO jako tablica JSON bez zadnego innego tekstu.',
+ `Wygeneruj 5 nowych slow angielskich A2. Uzytkownik zna juz: ${known}. Format: [{"w":"word","ph":"/wymowa/","pos":"czesc mowy","def":"tlumaczenie - opis","ex":"Przykladowe <b>word</b> zdanie.","tip":"Wskazowka","tag":"A2"}]`
+ );
+ const clean=text.replace(/```json|```/g,'').trim();
+ const newWords=JSON.parse(clean);
+ if(Array.isArray(newWords)&&newWords.length>0){
+ newWords.forEach(w=>{if(!WORDS.find(x=>x.w===w.w))WORDS.push(w);});
+ document.getElementById('session-end').classList.remove('show');
+ const pane=btn.dataset.pane||'morning';
+ if(pane==='morning')renderMorning();
+ else if(pane==='evening'){renderEvening();renderWordProgress();}
+ }
+ }catch(e){btn.textContent='BĹ‚Ä…d - sprobuj pozniej';}
+ btn.disabled=false;
 }
 
 const SYS={
-  m:'Jestes nauczycielem angielskiego A2. Tryb cichy. Odpowiadaj po polsku, krĂłtko (2-3 zdania). Angielskie slowa oznaczaj *gwiazdkami*.',
-  d:'Jestes nauczycielem angielskiego A2. Generujesz pytania quizowe w stylu wielokrotnego wyboru. Odpowiadaj po polsku. Angielskie wyrazy oznaczaj *gwiazdkami*.',
-  fri:'Jestes nauczycielem angielskiego A2. Tryb skupienia â€” piatek. Cwiczenia i gramatyka. Odpowiadaj po polsku. Angielskie wyrazy oznaczaj *gwiazdkami*.',
-  b:'Jestes nauczycielem angielskiego A2. Tryb bonusowy â€” angagujaca, interaktywna lekcja. Odpowiadaj po polsku z przykladami. Angielskie wyrazy oznaczaj *gwiazdkami*. BÄ…dz konkretny i ciekawy.'
+ m:'Jestes nauczycielem angielskiego A2. Tryb cichy. Odpowiadaj po polsku, krotko (2-3 zdania). Angielskie slowa oznaczaj *gwiazdkami*.',
+ d:'Jestes nauczycielem angielskiego A2. Generujesz pytania quizowe wielokrotnego wyboru. Odpowiadaj po polsku. Angielskie wyrazy oznaczaj *gwiazdkami*.',
+ fri:'Jestes nauczycielem angielskiego A2. Tryb skupienia - piatek. Cwiczenia i gramatyka. Odpowiadaj po polsku. Angielskie wyrazy oznaczaj *gwiazdkami*.',
+ b:'Jestes nauczycielem angielskiego A2. Tryb bonusowy - interaktywna lekcja. Odpowiadaj po polsku z przykladami. Angielskie wyrazy oznaczaj *gwiazdkami*. Badz konkretny i ciekawy.'
 };
-const API_KEY='';
 
 async function callAI(system, userMsg){
-  const headers={'Content-Type':'application/json','anthropic-version':'2023-06-01','anthropic-dangerous-allow-all-cors':'true'};
-  if(API_KEY)headers['x-api-key']=API_KEY;
-  const r=await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',headers,
-    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system,messages:[{role:'user',content:userMsg}]})
-  });
-  const data=await r.json();
-  if(data.error)throw new Error(data.error.message);
-  return data.content?.find(c=>c.type==='text')?.text||'Brak odpowiedzi.';
+ try{
+ const r=await fetch('https://api.anthropic.com/v1/messages',{
+ method:'POST',
+ headers:{
+ 'Content-Type':'application/json',
+ 'anthropic-version':'2023-06-01',
+ 'anthropic-dangerous-allow-all-cors':'true'
+ },
+ body:JSON.stringify({
+ model:'claude-sonnet-4-20250514',
+ max_tokens:800,
+ system,
+ messages:[{role:'user',content:userMsg}]
+ })
+ });
+ if(!r.ok){
+ const err=await r.json().catch(()=>({}));
+ throw new Error(err?.error?.message||'Blad HTTP '+r.status);
+ }
+ const data=await r.json();
+ return data.content?.find(c=>c.type==='text')?.text||'Brak odpowiedzi.';
+ }catch(e){
+ if(e.message.includes('fetch')||e.message.includes('Failed')){
+ throw new Error('Brak dostepu do AI. Upewnij sie ze masz polaczenie z internetem i sprobuj ponownie.');
+ }
+ throw e;
+ }
 }
 
 async function ask(mode){
-  const map={m:['m-inp','m-out','m-dots','m-btn'],d:['d-inp','d-out','d-dots','d-btn'],fri:['fri-inp','fri-out','fri-dots','fri-btn'],b:['b-inp','b-out','b-dots','b-btn']};
-  const[inId,outId,dotId,btnId]=map[mode];
-  let q=document.getElementById(inId).value.trim();
-  const known=Object.keys(S.ease).join(', ')||'brak';
-  const def={
-    m:`Wyjasni slĂłwko "${WORDS[S.mIdx%WORDS.length].w}" dla poziomu A2. Podaj definicje, przyklad i ciekawostke.`,
-    d:'Wygeneruj 3 ciekawe pytania quizowe A2 o slownictwie codziennym. Kazde pytanie z 4 opcjami.',
-    fri:`Wygeneruj cwiczenie z ${focusMode} dla poziomu A2. BÄ…dz konkretny, daj przyklady do uzupelnienia.`,
-    b:getBonusPrompt()
-  };
-  if(!q)q=def[mode];
-  document.getElementById(dotId).classList.add('show');
-  document.getElementById(outId).innerHTML='';
-  document.getElementById(btnId).disabled=true;
-  try{
-    const text=await callAI(SYS[mode]||SYS.b,q);
-    document.getElementById(outId).innerHTML=text.replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/\n/g,'<br>');
-  }catch(e){
-    document.getElementById(outId).innerHTML='<span style="color:var(--danger)">Blad AI: '+e.message+'</span>';
-  }
-  document.getElementById(dotId).classList.remove('show');
-  document.getElementById(btnId).disabled=false;
+ const map={m:['m-inp','m-out','m-dots','m-btn'],d:['d-inp','d-out','d-dots','d-btn'],fri:['fri-inp','fri-out','fri-dots','fri-btn'],b:['b-inp','b-out','b-dots','b-btn']};
+ const[inId,outId,dotId,btnId]=map[mode];
+ let q=document.getElementById(inId).value.trim();
+ const def={
+ m:`Wyjasni slowko "${WORDS[S.mIdx%WORDS.length].w}" dla poziomu A2. Podaj definicje po polsku, przykladowe zdanie i jedna ciekawostke.`,
+ d:'Wygeneruj 3 pytania quizowe A2 o slownictwie codziennym. Kazde z 4 opcjami. Zaznacz poprawna odpowiedz.',
+ fri:`Wygeneruj cwiczenie z ${focusMode} dla poziomu A2. Konkretne przyklady do uzupelnienia.`,
+ b:getBonusPrompt()
+ };
+ if(!q)q=def[mode];
+ document.getElementById(dotId).classList.add('show');
+ document.getElementById(outId).innerHTML='';
+ document.getElementById(btnId).disabled=true;
+ try{
+ const text=await callAI(SYS[mode]||SYS.b,q);
+ document.getElementById(outId).innerHTML=text
+ .replace(/\*(.*?)\*/g,'<em>$1</em>')
+ .replace(/\n\n/g,'</p><p style="margin-top:8px">')
+ .replace(/\n/g,'<br>');
+ }catch(e){
+ document.getElementById(outId).innerHTML=
+ '<div style="color:var(--danger);font-size:12px;padding:8px;background:rgba(255,92,122,.08);border-radius:6px">'+
+ 'AI niedostepne: '+e.message+'</div>';
+ }
+ document.getElementById(dotId).classList.remove('show');
+ document.getElementById(btnId).disabled=false;
 }
 
 function getBonusPrompt(){
-  const known=Object.keys(S.ease).slice(0,10).join(', ')||'busy, tired, early';
-  const prompts={
-    extra:`Wygeneruj 3 nowe slĂłwka A2 ktĂłrych uzytkownik jeszcze nie zna (zna juz: ${known}). Dla kazdego podaj: slĂłwko po angielsku, wymowe, tlumaczenie, przykladowe zdanie i wskazĂłwke pamieci. Format: slĂłwko - tlumaczenie - przyklad.`,
-    phrases:`Wygeneruj 5 praktycznych zwrotĂłw A2 do codziennych sytuacji (praca, sklep, transport). Dla kazdego: zwrot po angielsku, tlumaczenie, kiedy uzywac.`,
-    listen:`Napisz krĂłtki dialog A2 (6-8 linii) miedzy dwoma osobami w sytuacji z zycia codziennego (np. w biurze, sklepie, na drodze). Potem zadaj 2 pytania rozumienia do dialogu.`,
-    challenge:`Wygeneruj 5 trudniejszych pytan A2+ sprawdzajacych slownictwo. Tematy: praca, podrĂłze, emocje. Pytania otwarte â€” uzytkownik musi odpowiedziec calym zdaniem po angielsku.`
-  };
-  return prompts[bonusMode]||prompts.extra;
+ const known=Object.keys(S.ease).slice(0,10).join(', ')||'busy, tired, early';
+ const prompts={
+ extra:`Wygeneruj 3 nowe slowka angielskie A2 ktorych uzytkownik nie zna (zna juz: ${known}). Dla kazdego: slowko - wymowa - tlumaczenie - przykladowe zdanie - wskazowka. Format czytelny, krotki.`,
+ phrases:`Wygeneruj 5 praktycznych zwrotow angielskich A2 do codziennych sytuacji (praca, sklep, transport). Dla kazdego: zwrot po angielsku, tlumaczenie, kiedy uzywac.`,
+ listen:`Napisz krotki dialog A2 (6-8 linii) miedzy dwoma osobami w biurze lub sklepie. Potem zadaj 2 pytania do dialogu z 3 opcjami odpowiedzi.`,
+ challenge:`Wygeneruj 5 trudniejszych pytan A2+ sprawdzajacych slownictwo z pracy i zycia codziennego. Pytania otwarte - uzytkownik odpowiada calym zdaniem po angielsku.`
+ };
+ return prompts[bonusMode]||prompts.extra;
 }
 
 async function generateNewWords(){
-  const known=Object.keys(S.ease).join(', ')||'brak';
-  const system='Jestes nauczycielem angielskiego A2. Generujesz slownictwo. Odpowiadaj TYLKO w formacie JSON, bez zadnego innego tekstu.';
-  const prompt=`Wygeneruj 5 nowych slow angielskich A2 ktĂłrych uzytkownik nie zna jeszcze (zna juz: ${known}).
+ const known=Object.keys(S.ease).join(', ')||'brak';
+ const system='Jestes nauczycielem angielskiego A2. Generujesz slownictwo. Odpowiadaj TYLKO w formacie JSON, bez zadnego innego tekstu.';
+ const prompt=`Wygeneruj 5 nowych slow angielskich A2 ktorych uzytkownik nie zna jeszcze (zna juz: ${known}).
 Odpowiedz TYLKO jako tablica JSON, format:
-[{"w":"word","ph":"/wymowa/","pos":"czesc mowy po polsku","def":"tlumaczenie â€” krotki opis","ex":"Przykladowe <b>word</b> zdanie.","tip":"WskazĂłwka pamieci","tag":"A2"}]`;
-  try{
-    const text=await callAI(system,prompt);
-    const clean=text.replace(/```json|```/g,'').trim();
-    const newWords=JSON.parse(clean);
-    if(Array.isArray(newWords)&&newWords.length>0){
-      newWords.forEach(w=>{if(!WORDS.find(x=>x.w===w.w))WORDS.push(w);});
-      return true;
-    }
-  }catch(e){console.log('Blad generowania slowek:',e);}
-  return false;
+[{"w":"word","ph":"/wymowa/","pos":"czesc mowy po polsku","def":"tlumaczenie - krotki opis","ex":"Przykladowe <b>word</b> zdanie.","tip":"Wskazowka pamieci","tag":"A2"}]`;
+ try{
+ const text=await callAI(system,prompt);
+ const clean=text.replace(/```json|```/g,'').trim();
+ const newWords=JSON.parse(clean);
+ if(Array.isArray(newWords)&&newWords.length>0){
+ newWords.forEach(w=>{if(!WORDS.find(x=>x.w===w.w))WORDS.push(w);});
+ return true;
+ }
+ }catch(e){console.log('BĹ‚Ä…d generowania slowek:',e);}
+ return false;
 }
 
 async function showSessionEnd(mode){
-  const pane=document.getElementById('pane-'+mode);
-  const endDiv=document.createElement('div');
-  endDiv.className='card';
-  endDiv.style.cssText='text-align:center;padding:2rem;background:rgba(56,224,164,.08);border-color:rgba(56,224,164,.25)';
-  const xpEarned=S.sxp||0;
-  const total=WORDS.length;
-  const seen=Object.keys(S.ease).length;
-  endDiv.innerHTML=`
-    <div style="font-size:36px;margin-bottom:.5rem">đźŽ‰</div>
-    <div style="font-size:20px;font-weight:600;color:var(--accent2);margin-bottom:.5rem">Sesja skonczona!</div>
-    <div style="font-size:13px;color:var(--muted);margin-bottom:1.25rem">Przerobiles wszystkie slĂłwka na dzis</div>
-    <div style="display:flex;gap:10px;justify-content:center;margin-bottom:1.5rem">
-      <div style="background:var(--surface2);border-radius:8px;padding:8px 16px"><div style="font-size:18px;font-weight:600;color:var(--warn)">${xpEarned}</div><div style="font-size:10px;color:var(--muted)">XP dzis</div></div>
-      <div style="background:var(--surface2);border-radius:8px;padding:8px 16px"><div style="font-size:18px;font-weight:600;color:var(--accent2)">${seen}</div><div style="font-size:10px;color:var(--muted)">slĂłwek lacznie</div></div>
-    </div>
-    <div style="display:flex;gap:8px;flex-direction:column">
-      <button onclick="continueSession('${mode}')" style="padding:10px;background:var(--accent);border:none;border-radius:8px;color:white;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif">+ Wiecej slĂłwek (AI generuje nowe)</button>
-      <button onclick="goNav('evening')" style="padding:10px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif">Przejdz do wieczornej powtĂłrki</button>
-    </div>`;
-  pane.insertBefore(endDiv,pane.querySelector('.ai-box'));
-  endDiv.scrollIntoView({behavior:'smooth'});
+ const pane=document.getElementById('pane-'+mode);
+ const endDiv=document.createElement('div');
+ endDiv.className='card';
+ endDiv.style.cssText='text-align:center;padding:2rem;background:rgba(56,224,164,.08);border-color:rgba(56,224,164,.25)';
+ const xpEarned=S.sxp||0;
+ const total=WORDS.length;
+ const seen=Object.keys(S.ease).length;
+ endDiv.innerHTML=`
+ <div style="font-size:36px;margin-bottom:.5rem">đźŽ‰</div>
+ <div style="font-size:20px;font-weight:600;color:var(--accent2);margin-bottom:.5rem">Sesja skoĹ„czona!</div>
+ <div style="font-size:13px;color:var(--muted);margin-bottom:1.25rem">Przerobiles wszystkie slowka na dzis</div>
+ <div style="display:flex;gap:10px;justify-content:center;margin-bottom:1.5rem">
+ <div style="background:var(--surface2);border-radius:8px;padding:8px 16px"><div style="font-size:18px;font-weight:600;color:var(--warn)">${xpEarned}</div><div style="font-size:10px;color:var(--muted)">XP dziĹ›</div></div>
+ <div style="background:var(--surface2);border-radius:8px;padding:8px 16px"><div style="font-size:18px;font-weight:600;color:var(--accent2)">${seen}</div><div style="font-size:10px;color:var(--muted)">slowek Ĺ‚Ä…cznie</div></div>
+ </div>
+ <div style="display:flex;gap:8px;flex-direction:column">
+ <button onclick="continueSession('${mode}')" style="padding:10px;background:var(--accent);border:none;border-radius:8px;color:white;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif">+ WiÄ™cej slowek (AI generuje nowe)</button>
+ <button onclick="goNav('evening')" style="padding:10px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif">PrzejdĹş do wieczornej powtorki</button>
+ </div>`;
+ pane.insertBefore(endDiv,pane.querySelector('.ai-box'));
+ endDiv.scrollIntoView({behavior:'smooth'});
 }
 
 async function continueSession(mode){
-  const btn=event.target;btn.textContent='Generuje...';btn.disabled=true;
-  const ok=await generateNewWords();
-  if(ok){
-    btn.closest('.card').remove();
-    if(mode==='m')renderMorning();
-    else if(mode==='ev')renderEvening();
-  }else{
-    btn.textContent='Brak nowych slĂłwek';
-  }
+ const btn=event.target;btn.textContent='Generuje...';btn.disabled=true;
+ const ok=await generateNewWords();
+ if(ok){
+ btn.closest('.card').remove();
+ if(mode==='m')renderMorning();
+ else if(mode==='ev')renderEvening();
+ }else{
+ btn.textContent='Brak nowych slowek';
+ }
 }
 </script>
 </body>
