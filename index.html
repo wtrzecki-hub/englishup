@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>EnglishUp</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="EnglishUp">
+<link rel="apple-touch-icon" href="icon-192.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0f2ff;--muted:#7b82a0;--accent:#4f7cff;--accent2:#38e0a4;--warn:#ffb347;--danger:#ff5c7a;--radius:14px;--radius-sm:8px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6}
+#auth-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+.auth-box{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:2.5rem;text-align:center}
+.auth-logo{width:52px;height:52px;background:var(--accent);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem}
+.auth-logo svg{width:26px;height:26px;fill:white}
+.auth-title{font-size:22px;font-weight:600;margin-bottom:.25rem}
+.auth-sub{font-size:13px;color:var(--muted);margin-bottom:2rem}
+.auth-tabs{display:flex;gap:6px;margin-bottom:1.5rem;background:var(--bg);border-radius:var(--radius-sm);padding:4px}
+.auth-tab{flex:1;padding:7px;border-radius:6px;font-size:13px;cursor:pointer;color:var(--muted);border:none;background:none;font-family:'DM Sans',sans-serif;transition:all .15s}
+.auth-tab.active{background:var(--surface2);color:var(--text)}
+.auth-input{width:100%;padding:11px 14px;background:var(--bg);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;margin-bottom:10px}
+.auth-input:focus{border-color:var(--accent)}
+.auth-btn{width:100%;padding:12px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:white;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .15s}
+.auth-btn:hover{opacity:.85}.auth-btn:disabled{opacity:.5;cursor:not-allowed}
+.auth-msg{font-size:13px;margin-top:.75rem;min-height:20px}
+.auth-msg.ok{color:var(--accent2)}.auth-msg.err{color:var(--danger)}
+#app-screen{display:none;min-height:100vh;padding-bottom:20px}
+.topbar{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px 14px}
+.topbar-left{display:flex;align-items:center;gap:9px}
+.t-logo{width:30px;height:30px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.t-logo svg{width:15px;height:15px;fill:white}
+.t-name{font-size:16px;font-weight:600}
+.t-level{font-size:11px;background:rgba(79,124,255,.15);color:var(--accent);padding:3px 9px;border-radius:20px}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.xp-chip{font-size:12px;color:var(--muted)}
+.xp-num{font-weight:600;color:var(--warn);font-size:14px}
+.logout-btn{font-size:12px;color:var(--muted);background:none;border:1px solid var(--border2);border-radius:6px;padding:4px 9px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.user-email{font-size:11px;color:var(--muted);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.week-nav{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:12px 10px 0}
+.wday{border:1px solid var(--border);border-radius:10px;padding:7px 3px;text-align:center;cursor:pointer;transition:all .15s;background:var(--surface)}
+.wday:hover{border-color:var(--border2)}
+.wday.cur{border-color:var(--accent);background:rgba(79,124,255,.08)}
+.wday-name{font-size:9px;font-weight:500;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.wday.cur .wday-name{color:var(--accent)}
+.wday-ico{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;margin:0 auto 4px}
+.wday-ico svg{width:11px;height:11px}
+.wday-time{font-size:9px;color:var(--muted)}
+.wday-dot{width:5px;height:5px;border-radius:50%;margin:3px auto 0;background:var(--border)}
+.wday-dot.done{background:var(--accent2)}.wday-dot.today{background:var(--warn)}
+.pane{display:none;padding:12px 10px}.pane.active{display:block}
+.sec-label{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.75rem}
+.notice{display:flex;align-items:flex-start;gap:8px;font-size:12px;padding:9px 12px;border-radius:var(--radius-sm);margin-bottom:1rem;line-height:1.5}
+.notice svg{width:13px;height:13px;flex-shrink:0;margin-top:1px}
+.n-silent{background:rgba(255,179,71,.08);color:var(--warn);border:1px solid rgba(255,179,71,.15)}.n-silent svg{fill:var(--warn)}
+.n-focus{background:rgba(79,124,255,.08);color:#8fa8ff;border:1px solid rgba(79,124,255,.15)}.n-focus svg{fill:#8fa8ff}
+.n-wk{background:rgba(56,224,164,.08);color:var(--accent2);border:1px solid rgba(56,224,164,.15)}.n-wk svg{fill:var(--accent2)}
+.pb-row{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem}
+.pb{flex:1;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.pb-fill{height:100%;border-radius:2px;transition:width .4s}.pb-lbl{font-size:11px;color:var(--muted);min-width:40px;text-align:right}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem}
+.lc-meta{display:flex;align-items:center;gap:8px;margin-bottom:.875rem}
+.tag{font-size:10px;padding:3px 8px;border-radius:4px;font-weight:500}
+.ta2{background:rgba(255,179,71,.12);color:var(--warn)}.trev{background:rgba(79,124,255,.12);color:#8fa8ff}
+.tfoc{background:rgba(79,124,255,.12);color:#8fa8ff}.twk{background:rgba(56,224,164,.12);color:var(--accent2)}
+.lc-num{font-size:11px;color:var(--muted)}
+.w-big{font-size:28px;font-weight:600;color:var(--text);margin-bottom:3px;font-family:'DM Mono',monospace}
+.w-ph{font-size:12px;color:var(--muted);margin-bottom:7px;font-family:'DM Mono',monospace}
+.w-pos{display:inline-block;font-size:10px;padding:2px 6px;border-radius:4px;background:var(--surface2);color:var(--muted);margin-bottom:7px}
+.w-def{font-size:14px;color:#c0c8e8;margin-bottom:7px;line-height:1.5}
+.w-ex{font-size:13px;color:var(--muted);font-style:italic;line-height:1.6;padding:7px 10px;border-left:2px solid rgba(255,179,71,.4)}
+.w-ex b{color:var(--warn);font-style:normal;font-weight:500}
+.tip{margin-top:10px;padding:9px 12px;background:rgba(255,179,71,.06);border:1px solid rgba(255,179,71,.12);border-radius:var(--radius-sm);font-size:12px;color:#c8a060;line-height:1.5}
+.tip-lbl{font-size:10px;font-weight:600;color:var(--warn);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.rrow{display:flex;gap:5px;margin-top:1.125rem}
+.rbt{flex:1;padding:9px 3px;border-radius:var(--radius-sm);font-size:12px;cursor:pointer;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);text-align:center;transition:all .15s;font-family:'DM Sans',sans-serif}
+.rbt:hover{background:var(--surface)}.rbt span{display:block;font-size:10px;color:var(--muted);margin-top:1px;opacity:.7}
+.r0{border-color:rgba(255,92,122,.25);color:#ff8fa3;background:rgba(255,92,122,.08)}
+.r2{border-color:rgba(56,224,164,.25);color:var(--accent2);background:rgba(56,224,164,.08)}
+.r3{border-color:rgba(56,224,164,.35);color:var(--accent2);background:rgba(56,224,164,.12)}
+.drive-wrap{background:linear-gradient(135deg,#0d1b3e 0%,#0a1628 100%);border:1px solid rgba(79,124,255,.2);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem}
+.drive-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem}
+.d-badge{font-size:10px;background:rgba(79,124,255,.2);color:#8fa8ff;padding:3px 9px;border-radius:4px;letter-spacing:.4px;font-family:'DM Mono',monospace}
+.d-score{font-size:12px;color:#5a7aaa}
+.d-q{font-size:19px;font-weight:500;color:white;line-height:1.4;margin-bottom:1.125rem}
+.d-opts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.dopt{padding:16px 8px;border-radius:var(--radius-sm);background:rgba(79,124,255,.1);border:1px solid rgba(79,124,255,.2);color:#b0c4ff;font-size:15px;cursor:pointer;text-align:center;font-weight:500;transition:all .15s;font-family:'DM Sans',sans-serif}
+.dopt:hover{background:rgba(79,124,255,.2)}
+.dopt.ok{background:rgba(56,224,164,.12);border-color:rgba(56,224,164,.3);color:var(--accent2);pointer-events:none}
+.dopt.no{background:rgba(255,92,122,.1);border-color:rgba(255,92,122,.25);color:#ff8fa3;pointer-events:none}
+.timer-row{display:flex;align-items:center;gap:9px;margin-top:12px}
+.t-val{font-size:13px;font-weight:500;color:#5a7aaa;min-width:90px;font-family:'DM Mono',monospace}
+.t-bar-wrap{flex:1;height:4px;background:rgba(79,124,255,.1);border-radius:2px;overflow:hidden}
+.t-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 1s linear}
+.start-btn{padding:8px 16px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:white;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .15s;white-space:nowrap}
+.start-btn:hover{opacity:.85}.start-btn.stop{background:var(--danger)}.start-btn:disabled{opacity:.4;cursor:not-allowed}
+.d-next{width:100%;margin-top:9px;padding:11px;border-radius:var(--radius-sm);background:var(--accent);border:none;color:white;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:none;transition:opacity .15s}
+.d-next.show{display:block}.d-next:hover{opacity:.85}
+.focus-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:1rem}
+.fcard{border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;cursor:pointer;background:var(--surface);transition:all .15s}
+.fcard:hover{border-color:var(--border2)}.fcard.sel{border-color:rgba(79,124,255,.5);background:rgba(79,124,255,.08)}
+.fcard-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}.fcard-desc{font-size:11px;color:var(--muted)}
+.wk-timer{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:1rem}
+.wk-tval{font-size:22px;font-weight:600;color:var(--text);min-width:60px;font-family:'DM Mono',monospace}
+.wk-bar-wrap{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.wk-bar-fill{height:100%;background:var(--accent2);border-radius:3px;transition:width 1s linear}
+.wk-lbl{font-size:11px;color:var(--muted);white-space:nowrap}
+.wlist{display:flex;flex-direction:column;gap:5px;margin-bottom:1rem}
+.wi{display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm)}
+.wi-w{font-size:13px;font-weight:500;color:var(--text);min-width:90px;font-family:'DM Mono',monospace}
+.wi-t{font-size:12px;color:var(--muted);flex:1}
+.wi-bar{width:52px;height:3px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.wi-bf{height:100%;border-radius:2px;background:var(--accent)}
+.wi-n{font-size:10px;color:var(--muted);min-width:48px;text-align:right}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:1rem}
+.sbox{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;text-align:center}
+.sbox-val{font-size:20px;font-weight:600;color:var(--text);font-family:'DM Mono',monospace}
+.sbox-lbl{font-size:10px;color:var(--muted);margin-top:1px}
+.bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:1rem}
+.bcard{border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;cursor:pointer;background:var(--surface);transition:all .15s}
+.bcard:hover{border-color:var(--border2)}.bcard.sel{border-color:rgba(212,83,126,.4);background:rgba(212,83,126,.06)}
+.bcard-head{display:flex;align-items:center;gap:7px;margin-bottom:4px}
+.bcard-ico{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bcard-ico svg{width:11px;height:11px}
+.bcard-name{font-size:13px;font-weight:500;color:var(--text)}.bcard-desc{font-size:11px;color:var(--muted);line-height:1.4}
+.bcard-time{font-size:10px;color:var(--muted);margin-top:3px}
+.ai-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.125rem;margin-bottom:1rem}
+.ai-lbl{font-size:11px;color:var(--muted);margin-bottom:8px}
+.ai-row{display:flex;gap:7px}
+.ai-inp{flex:1;padding:8px 11px;border:1px solid var(--border2);border-radius:var(--radius-sm);font-size:13px;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;outline:none;resize:none}
+.ai-inp:focus{border-color:var(--accent)}.ai-inp::placeholder{color:var(--muted)}
+.ai-btn{padding:8px 13px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:white;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:opacity .15s}
+.ai-btn:hover{opacity:.85}.ai-btn:disabled{opacity:.4;cursor:not-allowed}
+.dots{display:none;align-items:center;gap:4px;margin-top:.625rem}.dots.show{display:flex}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:dp 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes dp{0%,80%,100%{opacity:.2}40%{opacity:1}}
+.ai-out{margin-top:.625rem;font-size:13px;color:#c0c8e8;line-height:1.7}
+.ai-out em{color:var(--accent2);font-weight:500;font-style:normal}
+.save-toast{position:fixed;bottom:20px;right:16px;background:var(--surface);border:1px solid rgba(56,224,164,.3);border-radius:var(--radius-sm);padding:7px 12px;font-size:12px;color:var(--accent2);display:none;z-index:100}
+.save-toast.show{display:block;animation:fadeout 2.5s forwards}
+@keyframes fadeout{0%{opacity:1}70%{opacity:1}100%{opacity:0}}
+</style>
+</head>
+<body>
+
+<div id="auth-screen">
+  <div class="auth-box">
+    <div class="auth-logo"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18V17l7 4 7-4v-5.82L23 9zm0 2.09L19.07 9 12 12.91 4.93 9zm6 9.29l-6 3.43-6-3.43v-3.56L12 15l6-3.18z"/></svg></div>
+    <div class="auth-title">EnglishUp</div>
+    <div class="auth-sub">Nauka angielskiego dopasowana do Twojego dnia</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Logowanie</button>
+      <button class="auth-tab" onclick="switchTab('register')">Rejestracja</button>
+    </div>
+    <input class="auth-input" id="auth-email" type="email" placeholder="Adres Gmail">
+    <input class="auth-input" id="auth-pass" type="password" placeholder="Haslo" onkeydown="if(event.key==='Enter')authAction()">
+    <button class="auth-btn" id="auth-btn" onclick="authAction()">Zaloguj sie</button>
+    <div class="auth-msg" id="auth-msg"></div>
+  </div>
+</div>
+
+<div id="app-screen">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="t-logo"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18V17l7 4 7-4v-5.82L23 9zm0 2.09L19.07 9 12 12.91 4.93 9zm6 9.29l-6 3.43-6-3.43v-3.56L12 15l6-3.18z"/></svg></div>
+      <div class="t-name">EnglishUp</div>
+      <div class="t-level">A2</div>
+    </div>
+    <div class="topbar-right">
+      <div class="xp-chip"><span class="xp-num" id="xp-disp">0</span> XP</div>
+      <span class="user-email" id="user-email"></span>
+      <button class="logout-btn" onclick="logout()">Wyloguj</button>
+    </div>
+  </div>
+  <div class="week-nav" id="week-nav"></div>
+
+  <div class="pane active" id="pane-morning">
+    <div class="notice n-silent"><svg viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0014 7.97V9.7l2.45 2.45c.03-.2.05-.41.05-.65zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>Tryb cichy · 15 min · bez dzwieku</div>
+    <div class="pb-row"><div class="pb"><div class="pb-fill" id="m-fill" style="width:20%;background:var(--accent)"></div></div><div class="pb-lbl" id="m-lbl">1/5</div></div>
+    <div class="card">
+      <div class="lc-meta"><span class="tag ta2" id="m-tag">A2</span><span class="lc-num" id="m-num">slówko 1 z 5</span></div>
+      <div class="w-big" id="m-word">busy</div><div class="w-ph" id="m-ph">/bizi/</div>
+      <span class="w-pos" id="m-pos">przymiotnik</span>
+      <div class="w-def" id="m-def">zajety — nie masz czasu</div>
+      <div class="w-ex" id="m-ex">I am very <b>busy</b> at work.</div>
+      <div class="tip"><div class="tip-lbl">Wskazówka</div><span id="m-tip">Nie myl z "dizzy"!</span></div>
+      <div class="rrow">
+        <div class="rbt r0" onclick="rate('m',0)">Nie znam<span>za 5 min</span></div>
+        <div class="rbt" onclick="rate('m',1)">Prawie<span>jutro</span></div>
+        <div class="rbt r2" onclick="rate('m',2)">Znam<span>za 3 dni</span></div>
+        <div class="rbt r3" onclick="rate('m',3)">Latwe!<span>za 7 dni</span></div>
+      </div>
+    </div>
+    <div class="ai-box">
+      <div class="ai-lbl">Zapytaj AI o slówko</div>
+      <div class="ai-row"><textarea class="ai-inp" id="m-inp" rows="1" placeholder='np. "Ulóz zdanie z busy w pracy"'></textarea><button class="ai-btn" id="m-btn" onclick="ask('m')">Zapytaj</button></div>
+      <div class="dots" id="m-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="ai-out" id="m-out"></div>
+    </div>
+  </div>
+
+  <div class="pane" id="pane-drive">
+    <div class="drive-wrap">
+      <div class="drive-head"><span class="d-badge" id="d-badge">BLOK 1 · PYT 1</span><span class="d-score" id="d-score">0/0</span></div>
+      <div class="d-q" id="d-q">Co znaczy "tired"?</div>
+      <div class="d-opts" id="d-opts">
+        <div class="dopt">A. zmeczony</div><div class="dopt">B. glodny</div>
+        <div class="dopt">C. szczesliwy</div><div class="dopt">D. zajety</div>
+      </div>
+      <div class="timer-row">
+        <div class="t-val" id="t-val">Gotowy</div>
+        <div class="t-bar-wrap"><div class="t-bar-fill" id="t-fill" style="width:100%"></div></div>
+        <button class="start-btn" id="start-btn" onclick="toggleTimer()">Start jazdy</button>
+      </div>
+      <button class="d-next" id="d-next" onclick="dNext()">Nastepne pytanie →</button>
+    </div>
+    <div class="ai-box">
+      <div class="ai-lbl">AI generuje pytania dopasowane do Twoich bledów</div>
+      <div class="ai-row"><textarea class="ai-inp" id="d-inp" rows="1" placeholder="np. Pytania o zawody..."></textarea><button class="ai-btn" id="d-btn" onclick="ask('d')">Generuj</button></div>
+      <div class="dots" id="d-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="ai-out" id="d-out"></div>
+    </div>
+  </div>
+
+  <div class="pane" id="pane-evening">
+    <div class="stats-grid">
+      <div class="sbox"><div class="sbox-val" id="ev-w">0</div><div class="sbox-lbl">slówek</div></div>
+      <div class="sbox"><div class="sbox-val" id="ev-s">0</div><div class="sbox-lbl">dni z rzedu</div></div>
+      <div class="sbox"><div class="sbox-val" id="ev-a">—</div><div class="sbox-lbl">skutecznosc</div></div>
+      <div class="sbox"><div class="sbox-val" id="ev-x">0</div><div class="sbox-lbl">XP dzis</div></div>
+    </div>
+    <div class="wlist" id="ev-list"></div>
+    <div class="card">
+      <div class="lc-meta"><span class="tag trev">Powtórka SRS</span><span class="lc-num" id="ev-num">1 z 5</span></div>
+      <div class="w-big" id="ev-word">busy</div><div class="w-def" id="ev-def">zajety</div>
+      <div class="w-ex" id="ev-ex">I am very <b>busy</b> today.</div>
+      <div class="rrow" style="margin-top:1rem">
+        <div class="rbt r0" onclick="rate('ev',0)">Nie pamietam<span>za 5 min</span></div>
+        <div class="rbt" onclick="rate('ev',1)">Prawie<span>jutro</span></div>
+        <div class="rbt r2" onclick="rate('ev',2)">Pamietam<span>za 4 dni</span></div>
+        <div class="rbt r3" onclick="rate('ev',3)">Latwe<span>za 10 dni</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pane" id="pane-friday">
+    <div class="notice n-focus"><svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>Praca zdalna · tryb skupienia</div>
+    <div class="sec-label">Wybierz tryb piatkowy</div>
+    <div class="focus-grid" id="focus-grid">
+      <div class="fcard sel" onclick="pickFocus(this,'grammar')"><div class="fcard-name">Gramatyka</div><div class="fcard-desc">Czasy, zdania, struktura</div></div>
+      <div class="fcard" onclick="pickFocus(this,'speaking')"><div class="fcard-name">Mówienie</div><div class="fcard-desc">Dialogi, wymowa, AI chat</div></div>
+      <div class="fcard" onclick="pickFocus(this,'reading')"><div class="fcard-name">Czytanie</div><div class="fcard-desc">Krótkie teksty A2</div></div>
+      <div class="fcard" onclick="pickFocus(this,'writing')"><div class="fcard-name">Pisanie</div><div class="fcard-desc">Maile, opisy, zdania</div></div>
+    </div>
+    <div class="card">
+      <div class="lc-meta"><span class="tag tfoc" id="fri-tag">Piatek · Gramatyka</span><span class="lc-num">sesja skupienia</span></div>
+      <div class="w-big">have got</div><div class="w-ph">/hæv got/</div><span class="w-pos">czasownik</span>
+      <div class="w-def">miec — brytyjski angielski zamiast "have"</div>
+      <div class="w-ex">I <b>have got</b> a new car. = I <b>have</b> a new car.</div>
+      <div class="tip"><div class="tip-lbl">Gramatyka A2</div>Pytanie: "Have you got...?" · Przeczenie: "I haven't got..."</div>
+      <div class="rrow">
+        <div class="rbt r0" onclick="rate('fri',0)">Nie znam<span>powtórz</span></div>
+        <div class="rbt" onclick="rate('fri',1)">Prawie<span>jutro</span></div>
+        <div class="rbt r2" onclick="rate('fri',2)">Znam<span>za 3 dni</span></div>
+        <div class="rbt r3" onclick="rate('fri',3)">Latwe!<span>za 7 dni</span></div>
+      </div>
+    </div>
+    <div class="ai-box">
+      <div class="ai-lbl">AI generuje cwiczenia z wybranej kategorii</div>
+      <div class="ai-row"><textarea class="ai-inp" id="fri-inp" rows="1" placeholder="np. Ulóz 3 zdania z have got..."></textarea><button class="ai-btn" id="fri-btn" onclick="ask('fri')">Zapytaj</button></div>
+      <div class="dots" id="fri-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="ai-out" id="fri-out"></div>
+    </div>
+  </div>
+
+  <div class="pane" id="pane-weekend">
+    <div class="notice n-wk"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>Powtórka tygodnia · 1 sesja 20 min · aplikacja sie zatrzymuje</div>
+    <div class="wk-timer">
+      <div class="wk-tval" id="wk-tval">20:00</div>
+      <div class="wk-bar-wrap"><div class="wk-bar-fill" id="wk-tbar" style="width:100%"></div></div>
+      <div class="wk-lbl" id="wk-lbl">20 minut</div>
+      <button class="start-btn" id="wk-start" onclick="toggleWkTimer()" style="margin-left:8px">Start</button>
+    </div>
+    <div class="sec-label">Slówka posortowane wg trudnosci</div>
+    <div class="wlist" id="wk-list"></div>
+    <div class="card">
+      <div class="lc-meta"><span class="tag twk">Powtórka tygodnia</span><span class="lc-num" id="wk-num">1 z 5</span></div>
+      <div class="w-big" id="wk-word">careful</div><div class="w-ph">/keərfəl/</div><span class="w-pos">przymiotnik</span>
+      <div class="w-def" id="wk-def">ostrozny</div>
+      <div class="w-ex" id="wk-ex">Be <b>careful</b> when you drive.</div>
+      <div class="rrow" style="margin-top:1rem">
+        <div class="rbt r0" onclick="rate('wk',0)">Nie pamietam<span>za 5 min</span></div>
+        <div class="rbt" onclick="rate('wk',1)">Prawie<span>jutro</span></div>
+        <div class="rbt r2" onclick="rate('wk',2)">Pamietam<span>za 4 dni</span></div>
+        <div class="rbt r3" onclick="rate('wk',3)">Latwe<span>za tydzien</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pane" id="pane-bonus">
+    <div style="font-size:13px;color:var(--muted);margin-bottom:1rem;line-height:1.6">Wolna chwila? Wybierz typ — AI dobierze material do Twojego poziomu.</div>
+    <div class="bonus-grid">
+      <div class="bcard sel" onclick="pickBonus(this,'extra')">
+        <div class="bcard-head"><div class="bcard-ico" style="background:rgba(212,83,126,.15);color:#e06090"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></div><div class="bcard-name">Extra slówka</div></div>
+        <div class="bcard-desc">Nowe slówka A2 których nie widziałes</div><div class="bcard-time">5–10 min</div>
+      </div>
+      <div class="bcard" onclick="pickBonus(this,'phrases')">
+        <div class="bcard-head"><div class="bcard-ico" style="background:rgba(56,224,164,.12);color:var(--accent2)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div><div class="bcard-name">Zwroty dnia</div></div>
+        <div class="bcard-desc">Gotowe zdania do codziennych sytuacji</div><div class="bcard-time">5 min</div>
+      </div>
+      <div class="bcard" onclick="pickBonus(this,'listen')">
+        <div class="bcard-head"><div class="bcard-ico" style="background:rgba(79,124,255,.12);color:var(--accent)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div><div class="bcard-name">Mini dialog</div></div>
+        <div class="bcard-desc">Krótki dialog — przeczytaj i odpowiedz</div><div class="bcard-time">5–8 min</div>
+      </div>
+      <div class="bcard" onclick="pickBonus(this,'challenge')">
+        <div class="bcard-head"><div class="bcard-ico" style="background:rgba(255,179,71,.1);color:var(--warn)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg></div><div class="bcard-name">Wyzwanie</div></div>
+        <div class="bcard-desc">AI zadaje trudniejsze pytania</div><div class="bcard-time">10 min</div>
+      </div>
+    </div>
+    <div class="ai-box">
+      <div class="ai-lbl" id="bonus-lbl">Extra slówka — AI generuje dla Ciebie</div>
+      <div class="ai-row"><textarea class="ai-inp" id="b-inp" rows="1" placeholder="lub wpisz wlasne zyczenie..."></textarea><button class="ai-btn" id="b-btn" onclick="ask('b')">Start</button></div>
+      <div class="dots" id="b-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="ai-out" id="b-out"></div>
+    </div>
+  </div>
+</div>
+
+<div class="save-toast" id="save-toast">✓ Zapisano w Supabase</div>
+
+<script>
+const SB_URL='https://tttdcowdmqidzolwburc.supabase.co';
+const SB_KEY='sb_publishable_BHCshXcTbj_574ux7Kd9tQ_--NmJXhs';
+const sb=supabase.createClient(SB_URL,SB_KEY);
+let currentUser=null,authMode='login';
+
+function switchTab(m){authMode=m;document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&m==='login')||(i===1&&m==='register')));document.getElementById('auth-btn').textContent=m==='login'?'Zaloguj sie':'Zarejestruj sie';document.getElementById('auth-msg').textContent='';}
+
+async function authAction(){
+  const email=document.getElementById('auth-email').value.trim(),pass=document.getElementById('auth-pass').value;
+  const msg=document.getElementById('auth-msg'),btn=document.getElementById('auth-btn');
+  if(!email||!pass){msg.textContent='Wpisz email i haslo';msg.className='auth-msg err';return;}
+  btn.disabled=true;msg.textContent='';
+  try{
+    const res=authMode==='login'?await sb.auth.signInWithPassword({email,password:pass}):await sb.auth.signUp({email,password:pass});
+    if(res.error)throw res.error;
+    if(authMode==='register'&&!res.data.session){msg.textContent='Sprawdz skrzynke — link weryfikacyjny wyslany!';msg.className='auth-msg ok';}
+    else if(res.data.session){currentUser=res.data.user;document.getElementById('user-email').textContent=currentUser.email;await initApp();}
+  }catch(e){msg.textContent=e.message==='Invalid login credentials'?'Nieprawidlowy email lub haslo':e.message;msg.className='auth-msg err';}
+  btn.disabled=false;
+}
+
+async function logout(){await sb.auth.signOut();currentUser=null;document.getElementById('app-screen').style.display='none';document.getElementById('auth-screen').style.display='flex';}
+
+const WORDS=[
+  {w:'busy',ph:'/bizi/',pos:'przymiotnik',def:'zajety — nie masz czasu',ex:'I am very <b>busy</b> at work.',tip:'Nie myl z "dizzy" (zawroty glowy)!',tag:'A2'},
+  {w:'tired',ph:'/tajerd/',pos:'przymiotnik',def:'zmeczony — chcesz odpoczac',ex:'She is <b>tired</b> after the drive.',tip:'"Tired of" = mam dosc czegos.',tag:'A2'},
+  {w:'early',ph:'/erli/',pos:'przyslówek',def:'wczesnie — przed normalnym czasem',ex:'He wakes up <b>early</b> every day.',tip:'"Early bird" = ranny ptaszek!',tag:'A2'},
+  {w:'hungry',ph:'/hangri/',pos:'przymiotnik',def:'glodny — chcesz zjesc',ex:'I am really <b>hungry</b> now!',tip:'"Hungry for success" — tez przenosnie.',tag:'A2'},
+  {w:'careful',ph:'/keərfəl/',pos:'przymiotnik',def:'ostrozny — uwazasz co robisz',ex:'Be <b>careful</b> when you drive.',tip:'"Be careful!" = uwazaj!',tag:'A2'},
+  {w:'meeting',ph:'/miiting/',pos:'rzeczownik',def:'spotkanie — rozmawiasz z innymi w pracy',ex:'I have a <b>meeting</b> at 10 AM.',tip:'"Meeting" to spotkanie, nie "spotykanie".',tag:'A2'},
+  {w:'deadline',ph:'/dedlajn/',pos:'rzeczownik',def:'termin — ostatni dzien oddania pracy',ex:'The <b>deadline</b> is on Friday.',tip:'Dead + line = linia smierci — nie przekrocz!',tag:'A2'},
+  {w:'colleague',ph:'/koliig/',pos:'rzeczownik',def:'kolega z pracy — pracujecie razem',ex:'My <b>colleague</b> helped me today.',tip:'Nie myl z "college" (uczelnia)!',tag:'A2'},
+  {w:'schedule',ph:'/skediul/',pos:'rzeczownik',def:'harmonogram — plan na dzien lub tydzien',ex:'Check my <b>schedule</b> for tomorrow.',tip:'Brytyjskie wymowa: /shediul/.',tag:'A2'},
+  {w:'urgent',ph:'/erdżent/',pos:'przymiotnik',def:'pilny — trzeba zrobic natychmiast',ex:'This email is very <b>urgent</b>.',tip:'"It is urgent" = to jest pilne.',tag:'A2'},
+  {w:'traffic',ph:'/træfik/',pos:'rzeczownik',def:'korki, ruch uliczny — samochody na drodze',ex:'There is heavy <b>traffic</b> on the motorway.',tip:'"Traffic jam" = korek.',tag:'A2'},
+  {w:'commute',ph:'/kemjuut/',pos:'czasownik/rzeczownik',def:'dojezdzac do pracy — codzienna jazda',ex:'My <b>commute</b> takes 2 hours.',tip:'"Commuter" = osoba dojeżdżajaca do pracy.',tag:'A2'},
+  {w:'motorway',ph:'/mooterwej/',pos:'rzeczownik',def:'autostrada — szybka droga',ex:'Drive on the <b>motorway</b> to save time.',tip:'US: "highway" lub "freeway".',tag:'A2'},
+  {w:'roundabout',ph:'/raundebaut/',pos:'rzeczownik',def:'rondo — okragly skrzyzowanie',ex:'Turn left at the <b>roundabout</b>.',tip:'US: "traffic circle".',tag:'A2'},
+  {w:'lane',ph:'/lejn/',pos:'rzeczownik',def:'pas ruchu — czesc drogi dla jednego auta',ex:'Stay in the left <b>lane</b>.',tip:'"Fast lane" = lewy pas, szybki.',tag:'A2'},
+  {w:'delayed',ph:'/dileid/',pos:'przymiotnik',def:'opózniony — nie na czas',ex:'The train is <b>delayed</b> by 20 minutes.',tip:'"Delay" (rzeczownik) = opóznienie.',tag:'A2'},
+  {w:'petrol',ph:'/petrel/',pos:'rzeczownik',def:'paliwo, benzyna',ex:'I need to fill up with <b>petrol</b>.',tip:'US: "gas" lub "gasoline".',tag:'A2'},
+  {w:'invoice',ph:'/inwois/',pos:'rzeczownik',def:'faktura — dokument do zaplaty',ex:'Please send me the <b>invoice</b>.',tip:'Czasownik: "to invoice" = wystawic fakture.',tag:'A2'},
+  {w:'reply',ph:'/riplaj/',pos:'czasownik',def:'odpowiedziec — napisac odpowiedz',ex:'Please <b>reply</b> to my email.',tip:'"Reply all" = odpowiedz wszystkim.',tag:'A2'},
+  {w:'attached',ph:'/etæczd/',pos:'przymiotnik',def:'zalaczony — plik w emailu',ex:'Please find the document <b>attached</b>.',tip:'"Please find attached" — klasyczne zdanie w emailu.',tag:'A2'},
+  {w:'available',ph:'/ewejlebl/',pos:'przymiotnik',def:'dostepny — mozna sie spotkac lub kupic',ex:'Are you <b>available</b> on Monday?',tip:'"I am not available" = nie moge, jestem zajety.',tag:'A2'},
+  {w:'confirm',ph:'/konferm/',pos:'czasownik',def:'potwierdzic — powiedziec ze sie zgadzasz',ex:'Please <b>confirm</b> your attendance.',tip:'"Confirmation" = potwierdzenie.',tag:'A2'},
+  {w:'presentation',ph:'/prezentejszyn/',pos:'rzeczownik',def:'prezentacja — pokazujesz projekt innym',ex:'I have a big <b>presentation</b> tomorrow.',tip:'"Give a presentation" = robic prezentacje.',tag:'A2'},
+  {w:'promote',ph:'/premoot/',pos:'czasownik',def:'awansowac — dostac lepsze stanowisko',ex:'She was <b>promoted</b> to manager.',tip:'"Promotion" = awans.',tag:'A2'},
+  {w:'salary',ph:'/sæleri/',pos:'rzeczownik',def:'pensja — pieniadze za prace miesieczna',ex:'His <b>salary</b> is quite good.',tip:'"Wages" = wyplata tygodniowa/godzinowa.',tag:'A2'},
+  {w:'remote',ph:'/rimoot/',pos:'przymiotnik',def:'zdalny — praca z domu',ex:'I work <b>remote</b> on Fridays.',tip:'"Remote work" = praca zdalna.',tag:'A2'},
+  {w:'department',ph:'/dipaartment/',pos:'rzeczownik',def:'dzial — czesc firmy np. marketing',ex:'She works in the HR <b>department</b>.',tip:'"Dept." = skrót.',tag:'A2'},
+  {w:'report',ph:'/ripoot/',pos:'rzeczownik',def:'raport — dokument z wynikami',ex:'I need to write a <b>report</b> by Monday.',tip:'"Report to someone" = podlegac komus.',tag:'A2'},
+  {w:'improve',ph:'/impruuv/',pos:'czasownik',def:'poprawiac — robic cos lepiej',ex:'I want to <b>improve</b> my English.',tip:'"Improvement" = poprawa, postep.',tag:'A2'},
+  {w:'frustrated',ph:'/frastrejted/',pos:'przymiotnik',def:'sfrustrowany — zdenerwowany gdy cos nie wychodzi',ex:'I feel <b>frustrated</b> with the traffic.',tip:'"Frustrating" opisuje sytuacje, nie osobe.',tag:'A2'},
+  {w:'responsible',ph:'/risponsybl/',pos:'przymiotnik',def:'odpowiedzialny — dbasz o cos',ex:'She is <b>responsible</b> for the project.',tip:'"Take responsibility" = wziac odpowiedzialnosc.',tag:'A2'},
+  {w:'flexible',ph:'/fleksybl/',pos:'przymiotnik',def:'elastyczny — mozna zmieniac plany',ex:'My working hours are <b>flexible</b>.',tip:'"Flexibility" = elastycznosc.',tag:'A2'},
+  {w:'efficient',ph:'/yfyszent/',pos:'przymiotnik',def:'wydajny — robisz duzo w krotkim czasie',ex:'She is very <b>efficient</b> at work.',tip:'"Efficiently" = wydajnie (przyslówek).',tag:'A2'},
+  {w:'customer',ph:'/kastemer/',pos:'rzeczownik',def:'klient — osoba ktora kupuje',ex:'The <b>customer</b> is always right.',tip:'"Client" = klient dlugoterminowy.',tag:'A2'},
+  {w:'feedback',ph:'/fidbæk/',pos:'rzeczownik',def:'informacja zwrotna — opinia o twojej pracy',ex:'Can I give you some <b>feedback</b>?',tip:'"Positive/negative feedback" = pozytywna/negatywna opinia.',tag:'A2'},
+  {w:'achieve',ph:'/ecziiv/',pos:'czasownik',def:'osiagnac — zrealizowac cel',ex:'I want to <b>achieve</b> my goals.',tip:'"Achievement" = osiagniecie.',tag:'A2'},
+  {w:'challenge',ph:'/czælyndż/',pos:'rzeczownik',def:'wyzwanie — trudna, ale mozliwa do wykonania rzecz',ex:'This project is a real <b>challenge</b>.',tip:'"Challenging" = wymagajacy.',tag:'A2'},
+  {w:'support',ph:'/sepoot/',pos:'czasownik',def:'wspierac — pomagac komus',ex:'My team always <b>supports</b> me.',tip:'"Support" tez rzeczownik: "offer support".',tag:'A2'},
+  {w:'manage',ph:'/mænydż/',pos:'czasownik',def:'zarzadzac lub poradzic sobie',ex:'Can you <b>manage</b> the project?',tip:'"I can manage" = poradze sobie.',tag:'A2'},
+  {w:'polite',ph:'/pelait/',pos:'przymiotnik',def:'grzeczny, uprzejmy — zachowujesz sie dobrze',ex:'Always be <b>polite</b> to customers.',tip:'"Politely" = grzecznie (przyslówek).',tag:'A2'},
+  {w:'nervous',ph:'/nervys/',pos:'przymiotnik',def:'zdenerwowany — czujesz niepokój przed czyms',ex:'I am <b>nervous</b> before presentations.',tip:'"Nervous" nie znaczy "nerwowy z natury"!',tag:'A2'},
+  {w:'confident',ph:'/konfydent/',pos:'przymiotnik',def:'pewny siebie — wierzysz w swoje mozliwosci',ex:'She is very <b>confident</b> in English.',tip:'"Confidence" = pewnosc siebie.',tag:'A2'},
+  {w:'apologise',ph:'/epolydżajz/',pos:'czasownik',def:'przeprosic — wyrazic ze zrobiles cos zle',ex:'I apologise for being late.',tip:'US: "apologize" z z. "Sorry" = nieformalne.',tag:'A2'},
+  {w:'suggest',ph:'/sedżest/',pos:'czasownik',def:'zaproponowac — masz pomysl dla kogos',ex:'I <b>suggest</b> meeting on Tuesday.',tip:'"I suggest + ing": I suggest going.',tag:'A2'},
+  {w:'arrange',ph:'/ereyndż/',pos:'czasownik',def:'zorganizowac — zaplanowac cos z wyprzedzeniem',ex:'Can you <b>arrange</b> the meeting?',tip:'"Arrangement" = ustalenia, plan.',tag:'A2'},
+  {w:'cancel',ph:'/kænsel/',pos:'czasownik',def:'odwolac — anulowac spotkanie lub plan',ex:'We had to <b>cancel</b> the meeting.',tip:'"Cancellation" = odwolanie.',tag:'A2'},
+  {w:'remind',ph:'/rimaind/',pos:'czasownik',def:'przypomniec — powiedziec komus o czyms',ex:'Please <b>remind</b> me about the call.',tip:'"Reminder" = przypomnienie.',tag:'A2'},
+  {w:'concentrate',ph:'/konsentreit/',pos:'czasownik',def:'koncentrowac sie — skupiac uwage na czyms',ex:'It is hard to <b>concentrate</b> in traffic.',tip:'"Concentrate on" = skupic sie na.',tag:'A2'},
+  {w:'estimate',ph:'/estymejt/',pos:'czasownik',def:'szacowac — przyblizony czas lub koszt',ex:'I <b>estimate</b> 2 hours for this task.',tip:'"Estimate" tez rzeczownik: "give an estimate".',tag:'A2'},
+  {w:'require',ph:'/rikwajer/',pos:'czasownik',def:'wymagac — cos jest potrzebne lub obowiazkowe',ex:'This job <b>requires</b> good English.',tip:'"Requirement" = wymaganie.',tag:'A2'},
+  {w:'permit',ph:'/permyt/',pos:'czasownik',def:'pozwolic — dac zgode na cos',ex:'Smoking is not <b>permitted</b> here.',tip:'"Permission" = pozwolenie.',tag:'A2'},
+  {w:'reduce',ph:'/ridjuus/',pos:'czasownik',def:'zmniejszyc — obnizyc ilosc lub koszt',ex:'We need to <b>reduce</b> costs.',tip:'"Reduction" = redukcja, obnizka.',tag:'A2'},
+  {w:'increase',ph:'/inkriis/',pos:'czasownik',def:'zwiekszac — podnosic ilosc lub wartosc',ex:'Sales <b>increased</b> by 10%.',tip:'"Increase" tez rzeczownik: "a big increase".',tag:'A2'},
+  {w:'update',ph:'/apdejt/',pos:'czasownik',def:'aktualizowac — dawac nowe informacje',ex:'Please <b>update</b> me on the project.',tip:'"What is the update?" = co nowego?',tag:'A2'},
+  {w:'approve',ph:'/epruuv/',pos:'czasownik',def:'zatwierdzic — oficjalnie zgodzic sie',ex:'The manager needs to <b>approve</b> this.',tip:'"Approval" = zatwierdzenie, aprobata.',tag:'A2'},
+  {w:'process',ph:'/proses/',pos:'rzeczownik',def:'proces — seria krokow do wykonania',ex:'What is the <b>process</b> for this?',tip:'"Process" tez czasownik: "process a request".',tag:'A2'},
+  {w:'issue',ph:'/yszuu/',pos:'rzeczownik',def:'problem lub kwestia do omówienia',ex:'We have an <b>issue</b> with the system.',tip:'Bardziej formalne niz "problem".',tag:'A2'},
+  {w:'handle',ph:'/hændl/',pos:'czasownik',def:'zajac sie czyms — poradzic sobie z zadaniem',ex:'Can you <b>handle</b> this request?',tip:'"Handle" = radzic sobie z czyms.',tag:'A2'},
+  {w:'complete',ph:'/kompliit/',pos:'czasownik',def:'ukonczyc — skonczyc zadanie w calosci',ex:'I need to <b>complete</b> this by Friday.',tip:'"Completion" = zakonczenie.',tag:'A2'},
+  {w:'launch',ph:'/looncz/',pos:'czasownik',def:'uruchomic, wprowadzic — zaczac nowy projekt',ex:'We will <b>launch</b> the product next month.',tip:'"Product launch" = premiera produktu.',tag:'A2'},
+];
+const DQS=[
+  {q:'Co znaczy "tired"?',opts:['zmeczony','glodny','szczesliwy','zajety'],ans:0},
+  {q:'Jak powiedziec "jestem glodny"?',opts:['I am busy','I am tired','I am hungry','I am early'],ans:2},
+  {q:'Uzupelnij: "Be ___ when you drive."',opts:['hungry','careful','tired','busy'],ans:1},
+  {q:'Co znaczy "early"?',opts:['pozno','wczesnie','szybko','wolno'],ans:1},
+  {q:'Co znaczy "deadline"?',opts:['poczatek','termin','spotkanie','wiadomosc'],ans:1},
+  {q:'Jak powiedziec "kolega z pracy"?',opts:['customer','colleague','commuter','manager'],ans:1},
+  {q:'Co znaczy "delayed"?',opts:['szybki','opózniony','zajety','wczesny'],ans:1},
+  {q:'Uzupelnij: "Please ___ to my email."',opts:['attach','reduce','reply','confirm'],ans:2},
+  {q:'Co znaczy "remote work"?',opts:['ciezka praca','nadgodziny','praca zdalna','praca nocna'],ans:2},
+  {q:'Co znaczy "urgent"?',opts:['wazny','pilny','trudny','dlugi'],ans:1},
+  {q:'Jak powiedziec "odwolac spotkanie"?',opts:['cancel a meeting','arrange a meeting','confirm a meeting','remind a meeting'],ans:0},
+  {q:'Co znaczy "feedback"?',opts:['wynagrodzenie','informacja zwrotna','spotkanie','raport'],ans:1},
+  {q:'Uzupelnij: "I need to ___ my English."',opts:['cancel','improve','permit','delay'],ans:1},
+  {q:'Co znaczy "available"?',opts:['pilny','dostepny','zajety','opózniony'],ans:1},
+  {q:'Jak powiedziec "osiagnac cel"?',opts:['achieve a goal','reduce a goal','handle a goal','launch a goal'],ans:0},
+  {q:'Co znaczy "salary"?',opts:['klient','pensja','faktura','raport'],ans:1},
+  {q:'Co znaczy "schedule"?',opts:['harmonogram','kolega','dzial','spotkanie'],ans:0},
+  {q:'Uzupelnij: "Can you ___ the meeting?"',opts:['reduce','permit','arrange','issue'],ans:2},
+  {q:'Co znaczy "confident"?',opts:['zdenerwowany','zmeczony','pewny siebie','ostrozny'],ans:2},
+  {q:'Jak powiedziec "zmniejszyc koszty"?',opts:['increase costs','reduce costs','launch costs','handle costs'],ans:1},
+  {q:'Co znaczy "commute"?',opts:['dojeżdżac do pracy','robic raport','wysylac email','zarzadzac'],ans:0},
+  {q:'Co znaczy "issue"?',opts:['cel','problem','sukces','raport'],ans:1},
+  {q:'Uzupelnij: "Please ___ me about the meeting."',opts:['cancel','remind','reduce','permit'],ans:1},
+  {q:'Co znaczy "efficient"?',opts:['grzeczny','elastyczny','wydajny','sfrustrowany'],ans:2},
+  {q:'Jak powiedziec "zatwierdzic"?',opts:['suggest','approve','manage','estimate'],ans:1},
+  {q:'Co znaczy "challenge"?',opts:['przerwa','wyzwanie','klient','proces'],ans:1},
+  {q:'Uzupelnij: "We will ___ the product next month."',opts:['cancel','reduce','launch','permit'],ans:2},
+  {q:'Co znaczy "flexible"?',opts:['pilny','wydajny','elastyczny','odpowiedzialny'],ans:2},
+  {q:'Jak powiedziec "ukonczyc zadanie"?',opts:['update a task','complete a task','suggest a task','report a task'],ans:1},
+  {q:'Co znaczy "concentrate"?',opts:['osiagnac','skupiac sie','zarządzac','wymagac'],ans:1},
+];
+const WEEK=[
+  {id:'morning',name:'Pon',sub:'rano 15min',bg:'rgba(255,179,71,.12)',fg:'var(--warn)',pane:'morning'},
+  {id:'drive',name:'Wt-Czw',sub:'jazda 2x20',bg:'rgba(56,224,164,.1)',fg:'var(--accent2)',pane:'drive'},
+  {id:'evening',name:'Wiecz',sub:'SRS',bg:'rgba(79,124,255,.12)',fg:'var(--accent)',pane:'evening'},
+  {id:'friday',name:'Pt',sub:'skupienie',bg:'rgba(79,124,255,.12)',fg:'var(--accent)',pane:'friday'},
+  {id:'saturday',name:'Sob',sub:'20 min',bg:'rgba(56,224,164,.1)',fg:'var(--accent2)',pane:'weekend'},
+  {id:'sunday',name:'Nd',sub:'20 min',bg:'rgba(56,224,164,.1)',fg:'var(--accent2)',pane:'weekend'},
+  {id:'bonus',name:'Bonus',sub:'zawsze',bg:'rgba(212,83,126,.12)',fg:'#e06090',pane:'bonus'},
+];
+const SVGS={morning:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79zm10.45-1.79l-1.8 1.79 1.41 1.41 1.8-1.79zM13 1h-2v3h2zM4 11H1v2h3zm16 0v2h3v-2zm-8 1c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95V22h2v-3.05c2.5-.5 4.5-2.5 4.5-5.95h-2c0 2.21-1.79 4-4 4s-4-1.79-4-4H5c0 3.45 2 5.45 4.5 5.95z"/></svg>`,drive:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>`,evening:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>`,friday:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>`,saturday:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>`,sunday:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>`,bonus:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>`};
+
+const DEF={xp:0,streak:0,totalWords:0,mIdx:0,dIdx:0,dCorrect:0,dWrong:0,evIdx:0,wkIdx:0,sxp:0,ease:{}};
+let S={...DEF},timer=null,timerSec=0,driving=false,wkTimer=null,wkSec=0,wkRunning=false,focusMode='grammar',bonusMode='extra';
+
+async function loadSupa(){
+  if(!currentUser)return;
+  const{data:p}=await sb.from('profiles').select('*').eq('id',currentUser.id).single();
+  if(p){S.xp=p.xp||0;S.streak=p.streak||0;}
+  const{data:words}=await sb.from('word_progress').select('*').eq('user_id',currentUser.id);
+  if(words){words.forEach(w=>{S.ease[w.word]=w.ease||0;});S.totalWords=words.length;}
+  const today=new Date().toISOString().split('T')[0];
+  const{data:stats}=await sb.from('daily_stats').select('*').eq('user_id',currentUser.id).eq('date',today).single();
+  if(stats)S.sxp=stats.total_xp||0;
+}
+
+async function saveSupa(){
+  if(!currentUser)return;
+  const today=new Date().toISOString().split('T')[0];
+  await sb.from('profiles').upsert({id:currentUser.id,xp:S.xp,streak:S.streak,last_active:today});
+  const rows=Object.entries(S.ease).map(([word,ease])=>({user_id:currentUser.id,word,ease,times_seen:1,last_seen:new Date().toISOString(),next_review:new Date().toISOString()}));
+  if(rows.length>0)await sb.from('word_progress').upsert(rows,{onConflict:'user_id,word'});
+  await sb.from('daily_stats').upsert({user_id:currentUser.id,date:today,total_xp:S.sxp,total_correct:S.dCorrect,total_wrong:S.dWrong,words_reviewed:S.totalWords},{onConflict:'user_id,date'});
+  const t=document.getElementById('save-toast');t.classList.remove('show');void t.offsetWidth;t.classList.add('show');
+}
+
+async function initApp(){
+  document.getElementById('auth-screen').style.display='none';
+  document.getElementById('app-screen').style.display='block';
+  await loadSupa();renderMorning();renderDrive();renderEvening();renderWeekend();buildNav();updateXP();
+}
+
+sb.auth.onAuthStateChange(async(event,session)=>{
+  if(session?.user&&!currentUser){currentUser=session.user;document.getElementById('user-email').textContent=currentUser.email;await initApp();}
+});
+
+function buildNav(){
+  const nav=document.getElementById('week-nav');nav.innerHTML='';
+  const today=(new Date().getDay()+6)%7;
+  WEEK.forEach((d,i)=>{
+    const cur=document.getElementById('pane-'+d.pane)?.classList.contains('active');
+    const el=document.createElement('div');el.className='wday'+(cur?' cur':'');
+    el.onclick=()=>go(d.pane,el);
+    el.innerHTML=`<div class="wday-name">${d.name}</div><div class="wday-ico" style="background:${d.bg};color:${d.fg}">${SVGS[d.id]||''}</div><div class="wday-time">${d.sub}</div><div class="wday-dot${i<today?' done':i===today?' today':''}"></div>`;
+    nav.appendChild(el);
+  });
+}
+
+function go(pane,el){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pane-'+pane).classList.add('active');
+  document.querySelectorAll('.wday').forEach(w=>w.classList.remove('cur'));
+  if(el)el.classList.add('cur');
+  if(pane==='evening')renderEvening();
+  if(pane==='weekend')renderWeekend();
+}
+
+function renderMorning(){
+  const i=S.mIdx%WORDS.length,w=WORDS[i];
+  ['m-word','m-ph','m-pos','m-def','m-tip','m-tag'].forEach(id=>{const map={'m-word':w.w,'m-ph':w.ph,'m-pos':w.pos,'m-def':w.def,'m-tip':w.tip,'m-tag':w.tag};document.getElementById(id).textContent=map[id];});
+  document.getElementById('m-ex').innerHTML=w.ex;
+  document.getElementById('m-num').textContent='slówko '+(i+1)+' z 5';
+  document.getElementById('m-fill').style.width=Math.round(((i+1)/5)*100)+'%';
+  document.getElementById('m-lbl').textContent=(i+1)+'/5';
+}
+
+function renderDrive(){
+  const q=DQS[S.dIdx%DQS.length];
+  document.getElementById('d-badge').textContent='BLOK '+(S.dIdx<DQS.length?1:2)+' · PYT '+(S.dIdx%DQS.length+1);
+  document.getElementById('d-score').textContent=S.dCorrect+'/'+(S.dCorrect+S.dWrong);
+  document.getElementById('d-q').textContent=q.q;
+  const L=['A','B','C','D'];
+  document.querySelectorAll('.dopt').forEach((o,i)=>{o.textContent=L[i]+'. '+q.opts[i];o.className='dopt';const c=i===q.ans;o.onclick=function(){dAns(this,c);};});
+  document.getElementById('d-next').classList.remove('show');
+}
+
+function dAns(el,ok){
+  const q=DQS[S.dIdx%DQS.length];
+  document.querySelectorAll('.dopt').forEach((o,i)=>{o.style.pointerEvents='none';if(i===q.ans)o.classList.add('ok');});
+  if(!ok){el.classList.add('no');S.dWrong++;}else{S.dCorrect++;S.xp+=8;S.sxp+=8;}
+  document.getElementById('d-score').textContent=S.dCorrect+'/'+(S.dCorrect+S.dWrong);
+  document.getElementById('d-next').classList.add('show');
+  updateXP();saveSupa();
+}
+function dNext(){S.dIdx++;renderDrive();}
+
+function toggleTimer(){
+  if(driving){clearInterval(timer);driving=false;document.getElementById('start-btn').textContent='Start jazdy';document.getElementById('start-btn').classList.remove('stop');document.getElementById('t-val').textContent='Zatrzymano';}
+  else{
+    driving=true;timerSec=20*60;document.getElementById('start-btn').textContent='Stop';document.getElementById('start-btn').classList.add('stop');
+    timer=setInterval(()=>{
+      timerSec--;const m=Math.floor(timerSec/60),s=timerSec%60;
+      document.getElementById('t-val').textContent=m+':'+(s<10?'0':'')+s;
+      document.getElementById('t-fill').style.width=Math.round((timerSec/(20*60))*100)+'%';
+      if(timerSec<=0){clearInterval(timer);driving=false;document.getElementById('start-btn').textContent='Start jazdy';document.getElementById('start-btn').classList.remove('stop');document.getElementById('t-val').textContent='Blok gotowy!';document.getElementById('t-fill').style.width='0%';}
+    },1000);
+  }
+}
+
+function renderEvening(){
+  const list=document.getElementById('ev-list');list.innerHTML='';
+  WORDS.forEach(w=>{const e=S.ease[w.w]||0;const d=document.createElement('div');d.className='wi';d.innerHTML=`<div class="wi-w">${w.w}</div><div class="wi-t">${w.def.split('—')[0].trim()}</div><div class="wi-bar"><div class="wi-bf" style="width:${e}%"></div></div><div class="wi-n">${e===0?'nowe':e<50?'dzis':'ok'}</div>`;list.appendChild(d);});
+  const w=WORDS[S.evIdx%WORDS.length];
+  document.getElementById('ev-word').textContent=w.w;document.getElementById('ev-def').textContent=w.def.split('—')[0].trim();document.getElementById('ev-ex').innerHTML=w.ex;
+  document.getElementById('ev-num').textContent=(S.evIdx%WORDS.length+1)+' z 5';
+  document.getElementById('ev-w').textContent=S.totalWords;document.getElementById('ev-s').textContent=S.streak;
+  document.getElementById('ev-a').textContent=S.dCorrect+S.dWrong>0?Math.round(S.dCorrect/(S.dCorrect+S.dWrong)*100)+'%':'—';
+  document.getElementById('ev-x').textContent=S.sxp;
+}
+
+function renderWeekend(){
+  const list=document.getElementById('wk-list');list.innerHTML='';
+  const sorted=[...WORDS].sort((a,b)=>(S.ease[a.w]||0)-(S.ease[b.w]||0));
+  sorted.forEach(w=>{const e=S.ease[w.w]||0;const d=document.createElement('div');d.className='wi';d.innerHTML=`<div class="wi-w">${w.w}</div><div class="wi-t">${w.def.split('—')[0].trim()}</div><div class="wi-bar"><div class="wi-bf" style="width:${e}%"></div></div><div class="wi-n">${e<30?'trudne':e<70?'srednie':'latwe'}</div>`;list.appendChild(d);});
+  const w=sorted[S.wkIdx%sorted.length];
+  document.getElementById('wk-word').textContent=w.w;document.getElementById('wk-def').textContent=w.def;document.getElementById('wk-ex').innerHTML=w.ex;
+  document.getElementById('wk-num').textContent=(S.wkIdx%sorted.length+1)+' z '+sorted.length;
+}
+
+function toggleWkTimer(){
+  if(wkRunning){clearInterval(wkTimer);wkRunning=false;document.getElementById('wk-start').textContent='Start';document.getElementById('wk-start').classList.remove('stop');}
+  else{
+    wkRunning=true;wkSec=20*60;document.getElementById('wk-start').textContent='Stop';document.getElementById('wk-start').classList.add('stop');
+    wkTimer=setInterval(()=>{
+      wkSec--;const m=Math.floor(wkSec/60),s=wkSec%60;
+      document.getElementById('wk-tval').textContent=m+':'+(s<10?'0':'')+s;
+      document.getElementById('wk-tbar').style.width=Math.round((wkSec/(20*60))*100)+'%';
+      document.getElementById('wk-lbl').textContent='pozostalo';
+      if(wkSec<=0){clearInterval(wkTimer);wkRunning=false;document.getElementById('wk-start').textContent='Koniec';document.getElementById('wk-start').disabled=true;document.getElementById('wk-start').classList.remove('stop');document.getElementById('wk-tval').textContent='Gotowe!';document.getElementById('wk-lbl').textContent='na dzis wystarczy';}
+    },1000);
+  }
+}
+
+function rate(mode,r){
+  const pts=[0,5,10,15][r];S.xp+=pts;S.sxp+=pts;
+  if(mode==='m'){const w=WORDS[S.mIdx%WORDS.length];S.ease[w.w]=Math.min(100,(S.ease[w.w]||0)+[0,20,40,70][r]);S.mIdx++;S.totalWords=Object.keys(S.ease).length;renderMorning();}
+  else if(mode==='ev'){const w=WORDS[S.evIdx%WORDS.length];S.ease[w.w]=Math.min(100,(S.ease[w.w]||0)+[0,15,30,50][r]);S.evIdx++;renderEvening();}
+  else if(mode==='wk'){S.wkIdx++;renderWeekend();}
+  updateXP();saveSupa();
+}
+
+function updateXP(){document.getElementById('xp-disp').textContent=S.xp;}
+function pickFocus(el,mode){focusMode=mode;document.querySelectorAll('.fcard').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');const L={grammar:'Piatek · Gramatyka',speaking:'Piatek · Mówienie',reading:'Piatek · Czytanie',writing:'Piatek · Pisanie'};document.getElementById('fri-tag').textContent=L[mode];}
+function pickBonus(el,mode){bonusMode=mode;document.querySelectorAll('.bcard').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');const L={extra:'Extra slówka — AI generuje',phrases:'Zwroty dnia — AI generuje',listen:'Mini dialog — AI generuje',challenge:'Wyzwanie — AI zagrywa trudniej'};document.getElementById('bonus-lbl').textContent=L[mode];}
+
+const SYS={m:'Jestes nauczycielem angielskiego A2. Tryb cichy. Odpowiadaj po polsku, krótko. Angielskie slowa oznaczaj *gwiazdkami*.',d:'Jestes nauczycielem angielskiego A2. Generujesz pytania quizowe. Odpowiadaj po polsku. Angielskie wyrazy oznaczaj *gwiazdkami*.',fri:'Jestes nauczycielem angielskiego A2. Tryb skupienia — piatek. Cwiczenia i gramatyka. Odpowiadaj po polsku. Angielskie wyrazy oznaczaj *gwiazdkami*.',b:'Jestes nauczycielem angielskiego A2. Tryb bonusowy. Odpowiadaj po polsku. Angielskie wyrazy oznaczaj *gwiazdkami*.'};
+
+async function ask(mode){
+  const map={m:['m-inp','m-out','m-dots','m-btn'],d:['d-inp','d-out','d-dots','d-btn'],fri:['fri-inp','fri-out','fri-dots','fri-btn'],b:['b-inp','b-out','b-dots','b-btn']};
+  const[inId,outId,dotId,btnId]=map[mode];
+  let q=document.getElementById(inId).value.trim();
+  const def={m:`Wyjasni slówko "${WORDS[S.mIdx%WORDS.length].w}" dla A2.`,d:'Wygeneruj 2 pytania quizowe A2.',fri:`Wygeneruj cwiczenie z ${focusMode} dla A2.`,b:`Wygeneruj lekcje bonusowa: ${bonusMode}. Poziom A2.`};
+  if(!q)q=def[mode];
+  document.getElementById(dotId).classList.add('show');document.getElementById(outId).innerHTML='';document.getElementById(btnId).disabled=true;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:SYS[mode]||SYS.m,messages:[{role:'user',content:q}]})});
+    const data=await r.json();
+    const text=data.content?.find(c=>c.type==='text')?.text||'Brak odpowiedzi.';
+    document.getElementById(outId).innerHTML=text.replace(/\*(.*?)\*/g,'<em>$1</em>');
+  }catch(e){document.getElementById(outId).textContent='Blad polaczenia z AI.';}
+  document.getElementById(dotId).classList.remove('show');document.getElementById(btnId).disabled=false;
+}
+</script>
+</body>
+</html>
